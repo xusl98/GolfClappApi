@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GolfClappApi", "GolfClappApi\GolfClappApi.csproj", "{642A23F1-B521-49BF-BF0F-CEDB0F05CCBB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GolfClappServiceLibrary", "GolfClappServiceLibrary\GolfClappServiceLibrary.csproj", "{277E4BE5-4ECA-4042-AB9F-C6B9F2480501}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectsLibrary", "ObjectsLibrary\ObjectsLibrary.csproj", "{A29C9838-AA38-4863-8882-3CD7C12A444B}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GolfClappDatabase", "GolfClappDatabase\GolfClappDatabase.sqlproj", "{BF9B8B0E-5DB0-45DF-B9B3-F0BA2DA37332}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GolfClapp.DB.Infrastructure", "GolfClapp.DB.Infrastructure\GolfClapp.DB.Infrastructure.csproj", "{3591C150-F573-4C61-9BF9-E388E206F4D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{642A23F1-B521-49BF-BF0F-CEDB0F05CCBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{642A23F1-B521-49BF-BF0F-CEDB0F05CCBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{642A23F1-B521-49BF-BF0F-CEDB0F05CCBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{642A23F1-B521-49BF-BF0F-CEDB0F05CCBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{277E4BE5-4ECA-4042-AB9F-C6B9F2480501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{277E4BE5-4ECA-4042-AB9F-C6B9F2480501}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{277E4BE5-4ECA-4042-AB9F-C6B9F2480501}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{277E4BE5-4ECA-4042-AB9F-C6B9F2480501}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A29C9838-AA38-4863-8882-3CD7C12A444B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A29C9838-AA38-4863-8882-3CD7C12A444B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A29C9838-AA38-4863-8882-3CD7C12A444B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A29C9838-AA38-4863-8882-3CD7C12A444B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF9B8B0E-5DB0-45DF-B9B3-F0BA2DA37332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF9B8B0E-5DB0-45DF-B9B3-F0BA2DA37332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF9B8B0E-5DB0-45DF-B9B3-F0BA2DA37332}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BF9B8B0E-5DB0-45DF-B9B3-F0BA2DA37332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF9B8B0E-5DB0-45DF-B9B3-F0BA2DA37332}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF9B8B0E-5DB0-45DF-B9B3-F0BA2DA37332}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3591C150-F573-4C61-9BF9-E388E206F4D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3591C150-F573-4C61-9BF9-E388E206F4D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3591C150-F573-4C61-9BF9-E388E206F4D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3591C150-F573-4C61-9BF9-E388E206F4D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C8AFFE0-5D54-4DEB-BE3B-C194F04D7E36}
+	EndGlobalSection
+EndGlobal
