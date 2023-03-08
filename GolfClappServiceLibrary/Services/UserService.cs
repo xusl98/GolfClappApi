@@ -14,22 +14,24 @@ namespace GolfClappServiceLibrary.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly ILogService _logService;
         private readonly IMapper _mapper;
-        public UserService(IMapper mapper, IUserRepository userRepository) 
+        public UserService(IMapper mapper, IUserRepository userRepository, ILogService logService) 
         {
             _mapper = mapper;
             _userRepository = userRepository;
+            _logService = logService;
         }
 
         public UserDTO GetUserById(Guid id)
         {
             try
-            {
+            {                
                 return _mapper.Map<UserEntity, UserDTO>(_userRepository.GetById(id));
             } catch (Exception ex)
             {
+                _logService.SaveErrorLog(ex.Message);
                 return null;
-                //Control exception
             }
         }
 
@@ -46,6 +48,7 @@ namespace GolfClappServiceLibrary.Services
             {
                 response.IsSuccess = false;
                 response.Message = ex.Message;
+                _logService.SaveErrorLog(ex.Message);
                 return response;
             }            
         }

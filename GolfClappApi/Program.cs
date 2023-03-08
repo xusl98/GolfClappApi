@@ -25,6 +25,8 @@ builder.Services.AddDbContext<GolfClappContext>(options => options.UseSqlServer(
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ILogService, LogService>();
+builder.Services.AddScoped<ILogRepository, LogRepository>();
 
 builder.Services.AddAutoMapper(x =>
 {

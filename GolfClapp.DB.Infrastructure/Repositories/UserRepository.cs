@@ -26,6 +26,7 @@ namespace GolfClapp.DB.Infrastructure.Repositories
         public UserEntity Save(UserEntity entity) 
         { 
             _context.Users.Add(entity);
+            _context.SaveChanges();
             return entity;
         }
     }

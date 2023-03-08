@@ -14,6 +14,7 @@ namespace GolfClapp.DB.Infrastructure.Mappings
         public MappingsProfile()
         {
             CreateMap<UserEntity, UserDTO>().ReverseMap();
+            CreateMap<LogEntity, LogDTO>().ReverseMap();
         }
     }
 }
