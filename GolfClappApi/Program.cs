@@ -1,5 +1,6 @@
 
 using GolfClapp.DB.Infrastructure;
+using GolfClapp.DB.Infrastructure.Mappings;
 using GolfClapp.DB.Infrastructure.Repositories;
 using GolfClapp.DB.Infrastructure.RepositoryServices;
 using GolfClappServiceLibrary.ServiceInterfaces;
@@ -24,6 +25,11 @@ builder.Services.AddDbContext<GolfClappContext>(options => options.UseSqlServer(
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddAutoMapper(x =>
+{
+    x.AddProfile(new MappingsProfile());
+});
 
 var app = builder.Build();
 

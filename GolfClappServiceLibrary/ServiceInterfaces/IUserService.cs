@@ -1,4 +1,5 @@
-﻿using ObjectsLibrary.Entities;
+﻿using ObjectsLibrary.DTOs;
+using ObjectsLibrary.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
 {
     public interface IUserService
     {
-        UserEntity GetUserById(Guid id);
+        UserDTO GetUserById(Guid id);
+        BaseResponseDTO Save(UserDTO user);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GolfClapp.DB.Infrastructure.RepositoryServices;
+using ObjectsLibrary.DTOs;
 using ObjectsLibrary.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,18 @@ namespace GolfClapp.DB.Infrastructure.Repositories
 
         public UserRepository(GolfClappContext context) 
         { 
-            _context = context;
+            _context = context; 
         }
 
         public UserEntity GetById(Guid id)
         {
             return _context.Users.FirstOrDefault(u => u.Id == id);
+        }
+
+        public UserEntity Save(UserEntity entity) 
+        { 
+            _context.Users.Add(entity);
+            return entity;
         }
     }
 }
