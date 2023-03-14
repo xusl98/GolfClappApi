@@ -11,9 +11,9 @@ namespace GolfClapp.DB.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly GolfClappContext _context;
+        private readonly AuthenticationContext _context;
 
-        public UserRepository(GolfClappContext context) 
+        public UserRepository(AuthenticationContext context) 
         { 
             _context = context; 
         }
