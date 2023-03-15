@@ -15,12 +15,21 @@ namespace GolfClapp.DB.Infrastructure
 
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<LogEntity> Logs { get; set; }
+        public DbSet<CourseEntity> Courses { get; set; }
+        public DbSet<ServiceProviderEntity> ServiceProviders { get; set; }
+        public DbSet<GameEntity> Games { get; set; }
+        public DbSet<GameUserEntity> GameUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new UserMapping());
             modelBuilder.ApplyConfiguration(new LogMapping());
+            modelBuilder.ApplyConfiguration(new ServiceProviderMapping());
+            modelBuilder.ApplyConfiguration(new CourseMapping());
+            modelBuilder.ApplyConfiguration(new GameMapping());
+            modelBuilder.ApplyConfiguration(new GameUserMapping());
+
         }
     }
 }
