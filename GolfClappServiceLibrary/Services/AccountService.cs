@@ -39,8 +39,8 @@ namespace GolfClappServiceLibrary.Services
                 //if (userExists != null)
                 //    throw new Exception("A user with that UserName already exists");
 
-                var identityUser = _mapper.Map<UserEntity>(user);
-                var result = await _userManager.CreateAsync(identityUser, user.Password);
+                UserEntity identityUser = _mapper.Map<UserEntity>(user);
+                var result = _userManager.CreateAsync(identityUser, user.Password).GetAwaiter().GetResult();
                 if (!result.Succeeded)
                     throw new Exception("User creation failed, please try again");
 

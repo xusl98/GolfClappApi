@@ -1,6 +1,10 @@
 ﻿using GolfClappServiceLibrary.ServiceInterfaces;
+using GolfClappServiceLibrary.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ObjectsLibrary.Authentication;
 using ObjectsLibrary.DTOs;
+using ObjectsLibrary.Entities;
 
 namespace GolfClappApi.Controllers
 {
@@ -8,16 +12,20 @@ namespace GolfClappApi.Controllers
     [Route("[controller]")]
     public class AccountController : ControllerBase    
     {
+        private readonly JwtService _jwtService;
         private readonly IAccountService _accountService;
+        private readonly UserManager<UserEntity> _userManager;
 
 
 
         private readonly ILogger<AccountController> _logger;
 
-        public AccountController(ILogger<AccountController> logger, IAccountService accountService)
+        public AccountController(ILogger<AccountController> logger, IAccountService accountService, JwtService jwtService, UserManager<UserEntity> userManager)
         {
             _logger = logger;
             _accountService = accountService;
+            _jwtService = jwtService;
+            _userManager = userManager;
         }
 
         [HttpPost("Register")]
@@ -31,11 +39,56 @@ namespace GolfClappApi.Controllers
                 Surname = surname,
                 Password = password,
                 Email = email,
-                Phone = phone,
+                PhoneNumber = phone,
                 Country = country,
                 License = license
             };
             return Ok(_accountService.Register(user));
+        }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<AuthenticationResponse>> Login(AuthenticationRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Bad credentials");
+            }
+
+            var user = await _userManager.FindByNameAsync(request.UserName);
+
+            if (user == null)
+            {
+                return BadRequest("Bad credentials");
+            }
+
+            var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
+
+            if (!isPasswordValid)
+            {
+                return BadRequest("Bad credentials");
+            }
+            var identityUser = new IdentityUser()
+            {
+                Id = user.Id.ToString(),
+                AccessFailedCount = user.AccessFailedCount,
+                ConcurrencyStamp = user.ConcurrencyStamp,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                EmailConfirmed = user.EmailConfirmed,
+                LockoutEnabled = user.LockoutEnabled,   
+                LockoutEnd = user.LockoutEnd,
+                NormalizedEmail = user.NormalizedEmail,
+                NormalizedUserName = user.NormalizedUserName,
+                PasswordHash = user.PasswordHash,
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                SecurityStamp = user.SecurityStamp,
+                TwoFactorEnabled = user.TwoFactorEnabled,
+                UserName = user.UserName
+            };
+            
+            var token = _jwtService.CreateToken(identityUser);
+
+            return Ok(token);
         }
 
 

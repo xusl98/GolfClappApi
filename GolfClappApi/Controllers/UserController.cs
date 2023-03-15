@@ -1,4 +1,6 @@
 ﻿using GolfClappServiceLibrary.ServiceInterfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ObjectsLibrary.DTOs;
 
@@ -10,6 +12,7 @@ namespace GolfClappApi.Controllers
     {
 
         private readonly IUserService _userService;
+        
 
         
 
@@ -21,8 +24,8 @@ namespace GolfClappApi.Controllers
             _userService = userService;
         }
 
-        
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("GetUserById")]
         public ActionResult GetUserById(string userId)
         {
