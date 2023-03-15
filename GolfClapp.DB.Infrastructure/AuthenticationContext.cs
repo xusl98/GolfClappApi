@@ -1,4 +1,6 @@
 ﻿using GolfClapp.DB.Infrastructure.Mappings;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ObjectsLibrary.Entities;
 using System;
@@ -9,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace GolfClapp.DB.Infrastructure
 {
-    public class GolfClappContext : DbContext
+    public class AuthenticationContext : IdentityDbContext<UserEntity, IdentityRole<Guid>, Guid>
     {
-        public GolfClappContext(DbContextOptions<GolfClappContext> options) : base(options) { }
+        public AuthenticationContext(DbContextOptions<AuthenticationContext> options) : base(options) { }
 
+        public DbSet<UserEntity> Users { get; set; }
         
-        public DbSet<LogEntity> Logs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new UserMapping());
             
-            modelBuilder.ApplyConfiguration(new LogMapping());
         }
     }
 }
