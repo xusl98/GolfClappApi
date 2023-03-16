@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace GolfClapp.DB.Infrastructure.Repositories
 {
-    public class ServiceProviderRepository : IServiceProviderRepository
+    public class CourseRepository : ICourseRepository
     {
 
         private readonly GolfClappContext _context;
-        public ServiceProviderRepository(GolfClappContext context) 
+        public CourseRepository(GolfClappContext context) 
         {
             _context = context;
         }
@@ -23,24 +23,24 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             return _context.ServiceProviders.ToList();
         }
 
-        public ServiceProviderEntity Get(Guid id)
+        public CourseEntity Get(Guid id)
         {
-            return _context.ServiceProviders.FirstOrDefault(s => s.Id == id);
+            return _context.Courses.FirstOrDefault(c => c.Id == id);
         }
 
-        public ServiceProviderEntity Remove(Guid id)
+        public CourseEntity Remove(Guid id)
         {
-            var sp = _context.ServiceProviders.FirstOrDefault(s => s.Id == id);
-            _context.ServiceProviders.Remove(sp);
+            var c = _context.Courses.FirstOrDefault(c => c.Id == id);
+            _context.Courses.Remove(c);
             _context.SaveChanges();
-            return sp;            
+            return c;            
         }
 
-        public ServiceProviderEntity Save(ServiceProviderEntity serviceProvider)
+        public CourseEntity Save(CourseEntity course)
         {
-            _context.ServiceProviders.Add(serviceProvider);
+            _context.Courses.Add(course);
             _context.SaveChanges();
-            return serviceProvider;
+            return course;
         }
     }
 }
