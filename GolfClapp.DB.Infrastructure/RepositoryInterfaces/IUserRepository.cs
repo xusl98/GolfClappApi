@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GolfClapp.DB.Infrastructure.RepositoryServices
+namespace GolfClapp.DB.Infrastructure.RepositoryInterfaces
 {
     public interface IUserRepository
     {

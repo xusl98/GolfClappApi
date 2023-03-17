@@ -1,4 +1,4 @@
-﻿using GolfClapp.DB.Infrastructure.RepositoryServices;
+﻿using GolfClapp.DB.Infrastructure.RepositoryInterfaces;
 using ObjectsLibrary.DTOs;
 using ObjectsLibrary.Entities;
 using System;

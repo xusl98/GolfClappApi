@@ -2,7 +2,7 @@
 using GolfClapp.DB.Infrastructure;
 using GolfClapp.DB.Infrastructure.Mappings;
 using GolfClapp.DB.Infrastructure.Repositories;
-using GolfClapp.DB.Infrastructure.RepositoryServices;
+using GolfClapp.DB.Infrastructure.RepositoryInterfaces;
 using GolfClappServiceLibrary.ServiceInterfaces;
 using GolfClappServiceLibrary.Services;
 using Microsoft.AspNetCore.Http;
@@ -24,9 +24,14 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDbContext<GolfClappContext>(options => options.UseSqlServer("Data Source=localhost;Initial Catalog=GOLFCLAPP;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Connect Timeout=60;Encrypt=False;Trust Server Certificate=False"));
 
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILogService, LogService>();
+
 builder.Services.AddScoped<ILogRepository, LogRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IServiceProviderRepository, ServiceProviderRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IGameRepository, GameRepository>();
+builder.Services.AddScoped<IGameUserRepository, GameUserRepository>();
 
 builder.Services.AddAutoMapper(x =>
 {
