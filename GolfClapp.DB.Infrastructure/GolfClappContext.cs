@@ -13,7 +13,7 @@ namespace GolfClapp.DB.Infrastructure
     {
         public GolfClappContext(DbContextOptions<GolfClappContext> options) : base(options) { }
 
-        public DbSet<UserEntity> Users { get; set; }
+        
         public DbSet<LogEntity> Logs { get; set; }
         public DbSet<CourseEntity> Courses { get; set; }
         public DbSet<ServiceProviderEntity> ServiceProviders { get; set; }
@@ -23,7 +23,7 @@ namespace GolfClapp.DB.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new UserMapping());
+            
             modelBuilder.ApplyConfiguration(new LogMapping());
             modelBuilder.ApplyConfiguration(new ServiceProviderMapping());
             modelBuilder.ApplyConfiguration(new CourseMapping());
