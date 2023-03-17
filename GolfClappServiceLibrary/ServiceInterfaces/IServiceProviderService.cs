@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace GolfClappServiceLibrary.ServiceInterfaces
 {
-    public interface ICourseService
+    public interface IServiceProviderService
     {        
-        BaseResponseDTO Save(CourseDTO course);
-        CourseDTO GetById(Guid id);
-        List<CourseDTO> Get();
+        BaseResponseDTO Save(ServiceProviderDTO serviceProvider);
+        ServiceProviderDTO GetById(Guid id);
+        List<ServiceProviderDTO> Get();
         BaseResponseDTO Remove(Guid id);
 
 

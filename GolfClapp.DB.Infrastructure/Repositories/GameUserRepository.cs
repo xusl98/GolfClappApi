@@ -38,8 +38,17 @@ namespace GolfClapp.DB.Infrastructure.Repositories
 
         public GameUserEntity Save(GameUserEntity gameUser)
         {
-            _context.GameUsers.Add(gameUser);
-            _context.SaveChanges();
+            var g = _context.GameUsers.FirstOrDefault(g => g.Id == gameUser.Id);
+            if (g == null)
+            {
+                _context.GameUsers.Add(gameUser);
+                _context.SaveChanges();
+            }
+            else
+            {
+                _context.GameUsers.Entry(g).CurrentValues.SetValues(gameUser);
+            }
+
             return gameUser;
         }
     }

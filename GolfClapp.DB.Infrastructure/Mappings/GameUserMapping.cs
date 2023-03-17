@@ -13,12 +13,7 @@ namespace GolfClapp.DB.Infrastructure.Mappings
             builder.HasKey(pk => pk.Id);
 
 
-            builder.HasOne(gu => gu.User)
-                .HasForeignKey(fk => fk.UserId);
-
-            builder.HasOne(gu => gu.Game)
-                .WithOne(g => g.Course);
-                .HasForeignKey(fk => fk.GameId)
+           
 
             
 

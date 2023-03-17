@@ -18,9 +18,9 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             _context = context;
         }
 
-        public List<ServiceProviderEntity> Get()
+        public List<CourseEntity> Get()
         {
-            return _context.ServiceProviders.ToList();
+            return _context.Courses.ToList();
         }
 
         public CourseEntity Get(Guid id)
@@ -38,8 +38,17 @@ namespace GolfClapp.DB.Infrastructure.Repositories
 
         public CourseEntity Save(CourseEntity course)
         {
-            _context.Courses.Add(course);
-            _context.SaveChanges();
+            var c = _context.Courses.FirstOrDefault(c => c.Id == course.Id);
+            if (c == null)
+            {
+                _context.Courses.Add(course);
+                _context.SaveChanges();
+            }
+            else
+            {
+                _context.Courses.Entry(c).CurrentValues.SetValues(course);
+            }
+
             return course;
         }
     }

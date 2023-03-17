@@ -38,8 +38,17 @@ namespace GolfClapp.DB.Infrastructure.Repositories
 
         public ServiceProviderEntity Save(ServiceProviderEntity serviceProvider)
         {
-            _context.ServiceProviders.Add(serviceProvider);
-            _context.SaveChanges();
+            var s = _context.ServiceProviders.FirstOrDefault(s => s.Id == serviceProvider.Id);
+            if (s == null)
+            {
+                _context.ServiceProviders.Add(serviceProvider);
+                _context.SaveChanges();
+            }
+            else
+            {
+                _context.ServiceProviders.Entry(s).CurrentValues.SetValues(serviceProvider);
+            }
+
             return serviceProvider;
         }
     }

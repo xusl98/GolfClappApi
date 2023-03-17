@@ -12,8 +12,7 @@ namespace GolfClapp.DB.Infrastructure.Mappings
             builder.ToTable("Course");
             builder.HasKey(pk => pk.Id);
 
-            builder.HasOne(c => c.ServiceProvider)
-                .HasForeignKey(fk => fk.ServiceProviderId);
+            
 
 
 

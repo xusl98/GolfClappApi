@@ -2,7 +2,7 @@
 using GolfClapp.DB.Infrastructure;
 using GolfClapp.DB.Infrastructure.Mappings;
 using GolfClapp.DB.Infrastructure.Repositories;
-using GolfClapp.DB.Infrastructure.RepositoryServices;
+using GolfClapp.DB.Infrastructure.RepositoryInterfaces;
 using GolfClappServiceLibrary.ServiceInterfaces;
 using GolfClappServiceLibrary.Services;
 using Microsoft.AspNetCore.Http;

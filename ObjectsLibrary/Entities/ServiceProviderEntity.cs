@@ -10,5 +10,7 @@ namespace ObjectsLibrary.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public List<CourseEntity> Courses { get; set; }
     }
 }
