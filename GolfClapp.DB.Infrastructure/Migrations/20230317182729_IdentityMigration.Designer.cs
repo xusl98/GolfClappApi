@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GolfClapp.DB.Infrastructure.Migrations
 {
     [DbContext(typeof(AuthenticationContext))]
-    [Migration("20230315144404_IdentityMigration")]
+    [Migration("20230317182729_IdentityMigration")]
     partial class IdentityMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

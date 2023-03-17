@@ -46,7 +46,7 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             }
             else
             {
-                _context.GameUsers.Entry(g).CurrentValues.SetValues(gameUser);
+                _context.Entry(g).CurrentValues.SetValues(gameUser);
             }
 
             return gameUser;

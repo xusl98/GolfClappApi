@@ -9,6 +9,7 @@ namespace GolfClappApi.Controllers
     [Route("[controller]")]
     public class GameUserController : ControllerBase
     {
+        //TODO add authorization to all controllers and create the rest of the tables on DB, then export it and upload it to drive
 
         private readonly IGameUserService _gameUserService;
         private readonly ILogService _logger;

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GolfClapp.DB.Infrastructure.RepositoryServices;
+using GolfClapp.DB.Infrastructure.RepositoryInterfaces;
 using GolfClappServiceLibrary.ServiceInterfaces;
 using Microsoft.AspNetCore.Identity;
 using ObjectsLibrary.DTOs;

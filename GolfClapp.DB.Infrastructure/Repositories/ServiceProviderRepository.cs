@@ -46,7 +46,7 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             }
             else
             {
-                _context.ServiceProviders.Entry(s).CurrentValues.SetValues(serviceProvider);
+                _context.Entry(s).CurrentValues.SetValues(serviceProvider);
             }
 
             return serviceProvider;
