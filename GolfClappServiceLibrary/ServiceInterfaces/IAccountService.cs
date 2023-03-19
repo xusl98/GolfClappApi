@@ -1,4 +1,5 @@
 ﻿using ObjectsLibrary.DTOs;
+using ObjectsLibrary.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
     public interface IAccountService
     {
         Task<BaseResponseDTO> Register(UserDTO user);
+        bool IsUserApiKeyValid(string userApiKey);
+        UserEntity GetByUserAPiKey(string userApiKey);
     }
 }

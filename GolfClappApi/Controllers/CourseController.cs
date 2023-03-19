@@ -1,4 +1,6 @@
 ﻿using GolfClappServiceLibrary.ServiceInterfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ObjectsLibrary.DTOs;
 using ObjectsLibrary.Entities;
@@ -19,6 +21,7 @@ namespace GolfClappApi.Controllers
             _courseService = courseService;
         }
 
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
         [HttpGet("GetAll")]
         public IActionResult Get()
         {
@@ -32,6 +35,8 @@ namespace GolfClappApi.Controllers
                 return BadRequest();
             }
         }
+
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
         [HttpGet("GetById/{id}")]
         public IActionResult Get(Guid id)
         {
@@ -46,6 +51,7 @@ namespace GolfClappApi.Controllers
             }
         }
 
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
         [HttpPost("Save")]
         public IActionResult Save([FromBody] CourseDTO course)
         {
@@ -60,6 +66,7 @@ namespace GolfClappApi.Controllers
             }
         }
 
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {

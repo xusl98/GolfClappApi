@@ -14,6 +14,7 @@ namespace ObjectsLibrary.Entities
         public string Surname { get; set; }
         public string Country { get; set; }
         public string? License { get; set; }
+        public string UserApiKey { get; set; }
 
     }
 }

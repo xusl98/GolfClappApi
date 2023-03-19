@@ -25,7 +25,8 @@ namespace GolfClappApi.Controllers
         }
 
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
         [HttpGet("GetUserById")]
         public ActionResult GetUserById(string userId)
         {

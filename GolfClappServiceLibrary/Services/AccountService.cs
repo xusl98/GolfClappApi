@@ -39,7 +39,8 @@ namespace GolfClappServiceLibrary.Services
                 //if (userExists != null)
                 //    throw new Exception("A user with that UserName already exists");
 
-                UserEntity identityUser = _mapper.Map<UserEntity>(user);
+                UserEntity identityUser = _mapper.Map<UserDTO, UserEntity>(user);
+                identityUser.UserApiKey = GenerateApiKeyValue();
                 var result = _userManager.CreateAsync(identityUser, user.Password).GetAwaiter().GetResult();
                 if (!result.Succeeded)
                     throw new Exception("User creation failed, please try again");
@@ -59,5 +60,17 @@ namespace GolfClappServiceLibrary.Services
                 return response;
             }
         }
+
+        public bool IsUserApiKeyValid(string userApiKey)
+        {
+            return _userRepository.IsUserApiKeyValid(userApiKey);
+        }
+        public UserEntity GetByUserAPiKey(string userApiKey)
+        {
+            return _userRepository.GetByUserAPiKey(userApiKey);
+        }
+
+        private string GenerateApiKeyValue() =>
+            $"{Guid.NewGuid().ToString()}-{Guid.NewGuid().ToString()}";
     }   
 }

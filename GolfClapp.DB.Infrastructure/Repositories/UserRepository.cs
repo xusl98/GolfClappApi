@@ -29,5 +29,15 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             _context.SaveChanges();
             return entity;
         }
+
+        public bool IsUserApiKeyValid(string userApiKey)
+        {
+            return _context.Users.Any(u => u.UserApiKey == userApiKey);
+        }
+        public UserEntity GetByUserAPiKey(string userApiKey)
+        {
+            return _context.Users.FirstOrDefault(u => u.UserApiKey == userApiKey);
+        }
     }
 }
+

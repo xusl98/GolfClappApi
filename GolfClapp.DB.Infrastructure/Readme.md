@@ -1,3 +1,6 @@
+Añadir la cadena de conexión en las properties de GolfClappDatabase
+
+
 add-migration IdentityMigration -context AuthenticationContext
 update-database -context AuthenticationContext
 
