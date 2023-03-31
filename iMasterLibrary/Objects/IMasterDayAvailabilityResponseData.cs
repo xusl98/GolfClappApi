@@ -44,7 +44,7 @@ namespace iMasterLibrary.Objects
         public int YieldDiscountId { get; set; }
     }
 
-    //TODO last response created is for: api/External/Availability/DayAvailability, continue creating responses for the calls mentioned on the documentation of iMaster
+    
 
 
 }
