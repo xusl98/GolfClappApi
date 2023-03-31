@@ -7,6 +7,9 @@ using GolfClapp.DB.Infrastructure.RepositoryInterfaces;
 using GolfClappApi;
 using GolfClappServiceLibrary.ServiceInterfaces;
 using GolfClappServiceLibrary.Services;
+using iMasterLibrary;
+using iMasterLibrary.ServiceInterfaces;
+using iMasterLibrary.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -59,6 +62,8 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+builder.Services.AddHttpClient();
+
 
 builder.Services.AddIdentity<UserEntity, IdentityRole<Guid>>()
     .AddEntityFrameworkStores<AuthenticationContext>()
@@ -76,6 +81,8 @@ builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IGameUserRepository, GameUserRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+
+builder.Services.AddScoped<IIMasterAccessService, IMasterAccessService>();
 
 builder.Services.AddScoped<UserManager<UserEntity>, UserManager<UserEntity>>();
 
@@ -119,6 +126,8 @@ builder.Services
         };
     })
     .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>("ApiKey", options => { });
+
+IMasterSessionData.ConnectionString = configuration["iMasterConnectionString"];
 
 
 

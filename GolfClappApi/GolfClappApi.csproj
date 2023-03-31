@@ -25,6 +25,7 @@
     <ProjectReference Include="..\GolfClapp.DB.Infrastructure\GolfClapp.DB.Infrastructure.csproj" />
     <ProjectReference Include="..\GolfClappDatabase\GolfClappDatabase.sqlproj" />
     <ProjectReference Include="..\GolfClappServiceLibrary\GolfClappServiceLibrary.csproj" />
+    <ProjectReference Include="..\iMasterLibrary\iMasterLibrary.csproj" />
     <ProjectReference Include="..\ObjectsLibrary\ObjectsLibrary.csproj" />
   </ItemGroup>
 
