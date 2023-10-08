@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace iMasterLibrary.Objects
 {
+
+    public class IMasterDayAvailabilityResponseDTO
+    {
+        public int Code { get; set; }
+        public string Msg { get; set; }
+        public IMasterDayAvailabilityResponseData Data { get; set; }
+
+    }
     public class IMasterDayAvailabilityResponseData : IMasterResponseData
     {
         public string PromoCodeMsg { get; set; }
@@ -21,7 +29,7 @@ namespace iMasterLibrary.Objects
         public DateTime Time { get; set; }
         public int CourseID { get; set; }
         public int PlayersAvailable { get; set; }
-        public List<Rate> RatesList { get; set; }
+        public List<Rate> Rates { get; set; }
         public int RatesCount { get; set; }
 
     }

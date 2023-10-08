@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using GolfClapp.DB.Infrastructure.RepositoryInterfaces;
 using GolfClappServiceLibrary.ServiceInterfaces;
+using Microsoft.AspNetCore.Identity;
+using ObjectsLibrary.Authentication;
 using ObjectsLibrary.DTOs;
 using ObjectsLibrary.Entities;
 using System;
@@ -26,13 +28,56 @@ namespace GolfClappServiceLibrary.Services
         public UserDTO GetUserById(Guid id)
         {
             try
-            {                
-                return _mapper.Map<UserEntity, UserDTO>(_userRepository.GetById(id));
+            {
+                var user = _mapper.Map<UserEntity, UserDTO>(_userRepository.GetById(id));
+                user.Password = "";
+                return user;
             } catch (Exception ex)
             {
                 _logService.SaveErrorLog(ex.Message);
                 return null;
             }
+        }
+
+        private UserEntity GetUserByApiKey(string id)
+        {
+            try
+            {
+                var user = _userRepository.GetByUserAPiKey(id);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logService.SaveErrorLog(ex.Message);
+                return null;
+            }
+        }
+
+        public void EditUserValues(UserUpdateObject userUpdateObject, string apiKey)
+        {
+            var user = GetUserByApiKey(apiKey);
+            if (userUpdateObject.Name != null)
+            {
+                user.Name = userUpdateObject.Name;
+            }
+            if (userUpdateObject.Email != null) 
+            { 
+                user.Email = userUpdateObject.Email;
+            }
+            if (userUpdateObject.Surname != null) 
+            {
+                user.Surname = userUpdateObject.Surname;
+            }
+            if (userUpdateObject.Phone != null)
+            {
+                user.PhoneNumber = userUpdateObject.Phone;
+            }
+            if (userUpdateObject.License != null)
+            {
+                user.License = userUpdateObject.License;
+            }
+
+            _userRepository.Save(user);
         }
 
         public BaseResponseDTO Save(UserDTO user)

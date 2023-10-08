@@ -42,13 +42,12 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             if (g == null)
             {
                 _context.Games.Add(game);
-                _context.SaveChanges();
             }
             else
             {
                 _context.Entry(g).CurrentValues.SetValues(game);
             }
-            
+            _context.SaveChanges();
             return game;
         }
     }

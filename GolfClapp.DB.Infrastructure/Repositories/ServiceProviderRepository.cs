@@ -42,13 +42,12 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             if (s == null)
             {
                 _context.ServiceProviders.Add(serviceProvider);
-                _context.SaveChanges();
             }
             else
             {
                 _context.Entry(s).CurrentValues.SetValues(serviceProvider);
             }
-
+            _context.SaveChanges();
             return serviceProvider;
         }
     }

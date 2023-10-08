@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iMasterLibrary.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace iMasterLibrary.ServiceInterfaces
 {
     public interface IIMasterAccessService
     {
-        Task<string> GetSessionData();
+        Task<IMasterAccessTokenResponseData> GetSessionData(string username, string password, int lifeSpanSeconds, string culture);
     }
 }

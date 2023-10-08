@@ -17,5 +17,6 @@ namespace ObjectsLibrary.DTOs
         public int PhoneNumber { get; set; }
         public string Country { get; set; }
         public string? License { get; set; }
+        public bool? GoogleSignIn { get; set; }
     }
 }

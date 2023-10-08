@@ -13,6 +13,7 @@ namespace GolfClapp.DB.Infrastructure.RepositoryInterfaces
         UserEntity GetById(Guid id);
         UserEntity Save(UserEntity entity);
         bool IsUserApiKeyValid(string userApiKey);
+        public string GetUserAPiKeyByEmail(string email);
         UserEntity GetByUserAPiKey(string userApiKey);
     }
 }

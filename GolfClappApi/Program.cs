@@ -33,6 +33,16 @@ builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlSe
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Key Auth", Version = "v1" });
@@ -82,7 +92,13 @@ builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IGameUserRepository, GameUserRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 
+builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+
 builder.Services.AddScoped<IIMasterAccessService, IMasterAccessService>();
+builder.Services.AddScoped<IIMasterProviderCourseService, IMasterProviderCourseService>();
+builder.Services.AddScoped<IIMasterProviderService, IMasterProviderService>();
+builder.Services.AddScoped<IIMasterDayAvailabilityService, IMasterDayAvailabilityService>();
 
 builder.Services.AddScoped<UserManager<UserEntity>, UserManager<UserEntity>>();
 
@@ -146,7 +162,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 

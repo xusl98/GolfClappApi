@@ -15,6 +15,7 @@ namespace ObjectsLibrary.Entities
         public string Country { get; set; }
         public string? License { get; set; }
         public string UserApiKey { get; set; }
+        public bool GoogleSignIn { get; set; }
 
     }
 }

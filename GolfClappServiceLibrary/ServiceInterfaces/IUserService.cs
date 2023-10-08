@@ -1,4 +1,5 @@
-﻿using ObjectsLibrary.DTOs;
+﻿using ObjectsLibrary.Authentication;
+using ObjectsLibrary.DTOs;
 using ObjectsLibrary.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
     public interface IUserService
     {
         UserDTO GetUserById(Guid id);
+        public void EditUserValues(UserUpdateObject userUpdateObject, string apiKey);
         BaseResponseDTO Save(UserDTO user);
     }
 }

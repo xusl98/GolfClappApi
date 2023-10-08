@@ -7,7 +7,14 @@ using System.Threading.Tasks;
 namespace iMasterLibrary.Objects
 {
 
-    public class IMasterProviderCoursesResponseData : IMasterResponseData
+    public class IMasterProviderCourseResponseDTO
+    {
+        public int Code { get; set; }
+        public string Msg { get; set; }
+        public IMasterProviderCourseResponseData Data { get; set; }
+
+    }
+    public class IMasterProviderCourseResponseData
     {
         public List<IMasterProviderCourse> CoursesList { get; set; }
         public int CoursesCount { get; set; }
@@ -19,6 +26,16 @@ namespace iMasterLibrary.Objects
         public int Holes { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+    }
+    public class IMasterProviderCourseAvailability
+    {
+        public string CourseID { get; set; }
+        public string CourseName { get; set; }
+        public int Holes { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public List<string> TimesAvailable { get; set; } //list of the hours
+        public int Price { get; set; }
     }
 
     

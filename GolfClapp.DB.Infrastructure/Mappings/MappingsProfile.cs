@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using iMasterLibrary.Objects;
 using ObjectsLibrary.DTOs;
 using ObjectsLibrary.Entities;
 using System;
@@ -19,6 +20,7 @@ namespace GolfClapp.DB.Infrastructure.Mappings
             CreateMap<CourseEntity, CourseDTO>().ReverseMap();
             CreateMap<GameEntity, GameDTO>().ReverseMap();
             CreateMap<GameUserEntity, GameUserDTO>().ReverseMap();
+            CreateMap<IMasterProviderCourse, IMasterProviderCourseAvailability>().ReverseMap();
         }
     }
 }

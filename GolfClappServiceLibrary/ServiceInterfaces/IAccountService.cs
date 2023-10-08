@@ -1,4 +1,6 @@
-﻿using ObjectsLibrary.DTOs;
+﻿using GolfClappServiceLibrary.Services;
+using ObjectsLibrary.Authentication;
+using ObjectsLibrary.DTOs;
 using ObjectsLibrary.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,8 +12,10 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
 {
     public interface IAccountService
     {
-        Task<BaseResponseDTO> Register(UserDTO user);
+        Task<CustomAuthenticationResponse> Register(UserDTO user);
+        Task<CustomAuthenticationResponse> UpdatePassword(string userId, string currentPassword, string newPassword);
         bool IsUserApiKeyValid(string userApiKey);
+        public string GetUserAPiKeyByEmail(string email);
         UserEntity GetByUserAPiKey(string userApiKey);
     }
 }

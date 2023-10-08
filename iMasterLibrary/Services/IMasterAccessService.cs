@@ -1,4 +1,5 @@
 ﻿
+using iMasterLibrary.Objects;
 using iMasterLibrary.ServiceInterfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -18,13 +19,13 @@ namespace iMasterLibrary.Services
             _httpClient = httpClient;
         }
 
-        public async Task<string> GetSessionData()
-        {
+        public async Task<IMasterAccessTokenResponseData> GetSessionData(string username, string password, int lifeSpanSeconds, string culture)
+        {            
             var content = new FormUrlEncodedContent(new Dictionary<string, string>
             {
                 { "username", "golfclapp@outlook.com" },
                 { "password", "654321" },
-                { "lifeSpanSeconds", "300" },
+                { "lifeSpanSeconds", "3600" },
                 { "culture", "es-ES" }
             });
             
@@ -32,12 +33,14 @@ namespace iMasterLibrary.Services
             if (result.IsSuccessStatusCode)
             {
                 var responseContent = await result.Content.ReadAsStringAsync();
-                JObject json = JObject.Parse(responseContent);
-                IMasterSessionData.SessionId = Int32.Parse(json["data"]["sessionID"].ToString());
-                IMasterSessionData.VendorId = Int32.Parse(json["data"]["vendorID"].ToString());
-                IMasterSessionData.AccessToken = json["data"]["accessToken"].ToString();
-                IMasterSessionData.Expiration = DateTime.Parse(json["data"]["expiration"].ToString());
-                return responseContent;
+                //JObject json = JObject.Parse(responseContent);
+
+                //IMasterSessionData.SessionId = Int32.Parse(json["data"]["sessionID"].ToString());
+                //IMasterSessionData.VendorId = Int32.Parse(json["data"]["vendorID"].ToString());
+                //IMasterSessionData.AccessToken = json["data"]["accessToken"].ToString();
+                //IMasterSessionData.Expiration = DateTime.Parse(json["data"]["expiration"].ToString());
+                var responseData = Newtonsoft.Json.JsonConvert.DeserializeObject<IMasterAccessTokenResponseData>(responseContent);
+                return responseData;
             }
             else
             {
