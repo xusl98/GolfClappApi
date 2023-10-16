@@ -5,6 +5,7 @@ using iMasterLibrary.ServiceInterfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -84,6 +85,10 @@ namespace iMasterLibrary.Services
                 {
                     var resp = await _providerCourseService.GetProviderCourses(vendorId, provider.ProviderID, provider.TourOperatorID, sessionId, accessToken, culture);
                     
+                    //TODO check this after the doubt about what exactly providers and providercourses are
+                    List<IMasterProviderCourseAvailability> coursesToDelete = new List<IMasterProviderCourseAvailability>();
+                    // />
+
                     provider.Courses = _mapper.Map<List<IMasterProviderCourse>, List<IMasterProviderCourseAvailability>>(resp.CoursesList);
                     foreach (var course in provider.Courses)
                     {
@@ -93,10 +98,20 @@ namespace iMasterLibrary.Services
                         {
                             course.Price = (avResp.TeeTimesAvailable.Count > 0 && avResp.TeeTimesAvailable.First().Rates.Count > 0) ? avResp.TeeTimesAvailable.First().Rates.First().SellPrice : 0;
                             course.TimesAvailable = avResp.TeeTimesAvailable.Select(t => t.Time.ToString("HH:mm")).ToList();
-                        }                        
+                            
+                        }
+                        //TODO check this after the doubt about what exactly providers and providercourses are
+                        if (course.TimesAvailable == null || (course.TimesAvailable.Count > 0 && course.TimesAvailable.First() == "") || course.TimesAvailable.Count == 0)
+                            coursesToDelete.Add(course);
+                        // />
                     }
-                    
+                    //TODO check this after the doubt about what exactly providers and providercourses are
+                    provider.Courses = provider.Courses.Where(c => !coursesToDelete.Any(c2 => c2.CourseID == c.CourseID)).ToList();
+                    // />
+
+
                 }
+                r.ProvidersList = r.ProvidersList.Where(p => p.Courses != null).Where(p => p.Courses.Count > 0).ToList();
 
                 return r;
             }

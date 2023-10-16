@@ -36,7 +36,7 @@ namespace GolfClappApi.Controllers
 
 
         [HttpPost("Register")]
-        public async Task<ObjectResponseDTO> RegisterAsync(string name, string userName, string surname, string password, string email, int phone, string country, bool googleSignIn, string? license)
+        public async Task<ObjectResponseDTO> RegisterAsync(string name, string userName, string surname, string password, string email, string phone, string country, bool googleSignIn, string? license)
         {
             var user = new UserDTO()
             {

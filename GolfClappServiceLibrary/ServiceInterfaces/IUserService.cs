@@ -12,7 +12,8 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
     public interface IUserService
     {
         UserDTO GetUserById(Guid id);
-        public void EditUserValues(UserUpdateObject userUpdateObject, string apiKey);
+        void EditUserValues(UserUpdateObject userUpdateObject, string apiKey);
         BaseResponseDTO Save(UserDTO user);
+        UserDTO GetUserByApiKey(string id);
     }
 }

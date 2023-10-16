@@ -27,6 +27,18 @@ namespace GolfClapp.DB.Infrastructure.Repositories
         {
             return _context.Games.FirstOrDefault(g => g.Id == id);
         }
+        public GameEntity GetByCourseIdAndDate(int providerCourseId, DateTime date)
+        {
+            return _context.Games.FirstOrDefault(g => g.ProviderCourseId == providerCourseId && g.Date == date);
+        }
+
+        public List<GameEntity> GetByDate(DateTime date, bool olderBookings)
+        {
+            if (olderBookings)
+                return _context.Games.Where(g => g.Date < date).OrderBy(g => g.Date).ToList();
+            else
+                return _context.Games.Where(g => g.Date >= date).OrderBy(g => g.Date).ToList();
+        }
 
         public GameEntity Remove(Guid id)
         {

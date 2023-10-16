@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace ObjectsLibrary.Entities
 {
-    public class GameEntity
+    public class SaveAndAddUserRequestDTO
     {
-        public Guid Id { get; set; }
-        public DateTime Date { get; set; }
-        //public Guid? CourseId { get; set; }
+        public string Date { get; set; }
+        public string? CourseId { get; set; }
         public string CourseName { get; set; }
         public string Location { get; set; }
         public double Price { get; set; }
         public int ProviderCourseId { get; set; }
-        public int Holes { get; set; }
+       
 
-        public CourseEntity? Course { get; set; }
+
     }
 }

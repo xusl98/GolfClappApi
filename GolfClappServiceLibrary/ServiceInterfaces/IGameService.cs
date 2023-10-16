@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 namespace GolfClappServiceLibrary.ServiceInterfaces
 {
     public interface IGameService
-    {        
-        BaseResponseDTO Save(GameDTO game);
+    {
+        GameDTO Save(GameDTO game);
         GameDTO GetById(Guid id);
         List<GameDTO> Get();
         BaseResponseDTO Remove(Guid id);
+        List<GameDTO> GetByDate(DateTime date, bool olderBookings);
 
 
     }

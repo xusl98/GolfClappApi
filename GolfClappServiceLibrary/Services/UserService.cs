@@ -39,11 +39,11 @@ namespace GolfClappServiceLibrary.Services
             }
         }
 
-        private UserEntity GetUserByApiKey(string id)
+        public UserDTO GetUserByApiKey(string id)
         {
             try
             {
-                var user = _userRepository.GetByUserAPiKey(id);
+                var user = _mapper.Map<UserEntity, UserDTO>(_userRepository.GetByUserAPiKey(id));
                 return user;
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace GolfClappServiceLibrary.Services
                 user.License = userUpdateObject.License;
             }
 
-            _userRepository.Save(user);
+            _userRepository.Save(_mapper.Map<UserDTO, UserEntity>(user));
         }
 
         public BaseResponseDTO Save(UserDTO user)

@@ -88,6 +88,8 @@ builder.Services.AddScoped<ILogRepository, LogRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IServiceProviderRepository, ServiceProviderRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IGameUserService, GameUserService>();
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IGameUserRepository, GameUserRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();

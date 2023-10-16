@@ -24,20 +24,21 @@ namespace GolfClappServiceLibrary.Services
         }
 
 
-        public BaseResponseDTO Save(GameDTO game)
+        public GameDTO Save(GameDTO game)
         {
-            var response = new BaseResponseDTO();
             try
             {
-                _gameRepository.Save(_mapper.Map<GameDTO, GameEntity>(game));
-                response.IsSuccess = true;
-                return response;
+                var result = _mapper.Map<GameEntity, GameDTO>(_gameRepository.GetByCourseIdAndDate(game.ProviderCourseId, game.Date));
+                if (result == null)
+                    return _mapper.Map<GameEntity, GameDTO>(_gameRepository.Save(_mapper.Map<GameDTO, GameEntity>(game)));
+                else
+                    return result;
+
+                
             }
             catch (Exception ex)
             {
-                response.IsSuccess = false;
-                response.Message = ex.Message;
-                return response;
+                return null;
             }            
         }
 
@@ -50,6 +51,11 @@ namespace GolfClappServiceLibrary.Services
         public List<GameDTO> Get()
         {
             return _mapper.Map<List<GameEntity>, List<GameDTO>>(_gameRepository.Get());
+        }
+
+        public List<GameDTO> GetByDate(DateTime date, bool olderBookings)
+        {
+            return _mapper.Map<List<GameEntity>, List<GameDTO>>(_gameRepository.GetByDate(date, olderBookings));
         }
 
         public BaseResponseDTO Remove(Guid id)

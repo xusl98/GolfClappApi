@@ -11,7 +11,9 @@ namespace GolfClapp.DB.Infrastructure.RepositoryInterfaces
     {
         GameEntity Save(GameEntity gameEntity);
         List<GameEntity> Get();
+        GameEntity GetByCourseIdAndDate(int providerCourseId, DateTime date);
         GameEntity Get(Guid id);
         GameEntity Remove(Guid id);
+        List<GameEntity> GetByDate(DateTime date, bool olderBookings);
     }
 }

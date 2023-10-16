@@ -11,6 +11,7 @@ namespace ObjectsLibrary.Entities
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public Guid GameId { get; set; }
+        public string Name { get; set; }
         public bool ExternalUser { get; set; }
         public int Score { get; set; }
     }

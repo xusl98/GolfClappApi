@@ -1,9 +1,14 @@
 ﻿using GolfClappServiceLibrary.ServiceInterfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient.Server;
 using ObjectsLibrary.DTOs;
 using ObjectsLibrary.Entities;
+using System.Dynamic;
+using System.Globalization;
+using System.Transactions;
 
 namespace GolfClappApi.Controllers
 {
@@ -13,12 +18,16 @@ namespace GolfClappApi.Controllers
     {
 
         private readonly IGameService _gameService;
+        private readonly IGameUserService _gameUserService;
+        private readonly IUserService _userService;
         private readonly ILogService _logger;
 
-        public GameController(ILogService logger, IGameService gameService)
+        public GameController(ILogService logger, IGameService gameService, IGameUserService gameUserService, IUserService userService)
         {
             _logger = logger;
             _gameService = gameService;
+            _gameUserService = gameUserService;
+            _userService = userService;
         }
 
         [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
@@ -81,8 +90,84 @@ namespace GolfClappApi.Controllers
             }
         }
 
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpPost("SaveAndAddUser")]
+        public IActionResult SaveAndAddUser([FromBody] SaveAndAddUserRequestDTO saveAndAddUserRequestDTO)
+        {
+            try
+            {
+                string apiKey = HttpContext.Request.Headers["Api-Key"];
+                UserDTO user =  _userService.GetUserByApiKey(apiKey);
+                //using (var scope = new TransactionScope())
+                //{
+                
+                        DateTime.TryParseExact(saveAndAddUserRequestDTO.Date, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result);
+                        var game = _gameService.Save(new GameDTO()
+                        {
+                            Id = Guid.NewGuid(),                            
+                            CourseName = saveAndAddUserRequestDTO.CourseName,
+                            Date = result,
+                            Location = saveAndAddUserRequestDTO.Location,
+                            Price = saveAndAddUserRequestDTO.Price,
+                            ProviderCourseId = saveAndAddUserRequestDTO.ProviderCourseId
+                        });
+                        _gameUserService.Save(new GameUserDTO()
+                        {
+                            Id = Guid.NewGuid(),
+                            ExternalUser = false,
+                            Name = user.Name + " " + user.Surname,
+                            GameId = game.Id,
+                            Score = 0,
+                            UserId = user.Id
+                            
+                        });
+
+
+                        //scope.Complete();
+                        return Ok("Data saved successfully.");
+                   
+                //}
+                
+            }
+            catch (Exception ex)
+            {
+                _logger.SaveErrorLog(ex.Message);
+                return BadRequest();
+            }
+        }
+
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpPost("GetByDate")]
+        public async Task<ObjectResponseDTO> GetByDate([FromBody] GetByDateRequestDTO request)
+        {
+            var responseObject = new ObjectResponseDTO();
+            try
+            {
+                var resp = new GetByDateResponseDTO();
+                resp.Bookings = _gameService.GetByDate(request.Date, request.OlderBookings);
+                responseObject.StatusCode = 200;
+                responseObject.Body = resp;
+                return responseObject;
+            }
+            catch (Exception ex)
+            {
+                _logger.SaveErrorLog(ex.Message);
+                return null;
+            }
+        }
 
 
 
+
+    }
+
+    public class GetByDateRequestDTO
+    {
+        public DateTime Date { get; set; }
+        public bool OlderBookings { get; set; }
+    }
+    public class GetByDateResponseDTO
+    {
+        public List<GameDTO> Bookings { get; set; }
     }
 }
