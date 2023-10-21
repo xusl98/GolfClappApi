@@ -34,10 +34,17 @@ namespace GolfClapp.DB.Infrastructure.Repositories
 
         public List<GameEntity> GetByDate(DateTime date, bool olderBookings)
         {
-            if (olderBookings)
-                return _context.Games.Where(g => g.Date < date).OrderBy(g => g.Date).ToList();
-            else
+            if (!olderBookings)
                 return _context.Games.Where(g => g.Date >= date).OrderBy(g => g.Date).ToList();
+            else
+            {
+                var list = new List<GameEntity>();
+                list.AddRange(_context.Games.Where(g => g.Date >= date).OrderBy(g => g.Date).ToList());
+                list.AddRange(_context.Games.Where(g => g.Date < date).OrderBy(g => g.Date).ToList());
+                return list;
+
+            }
+                
         }
 
         public GameEntity Remove(Guid id)
