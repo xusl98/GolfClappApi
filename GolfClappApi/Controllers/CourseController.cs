@@ -106,8 +106,27 @@ namespace GolfClappApi.Controllers
 
 
                 responseObject.StatusCode = 200;
-                responseObject.Body = await _iMasterProviderService.GetProvidersWithCourses(response.Result.data.VendorID, response.Result.data.SessionID, response.Result.data.AccessToken, "ES-es", providerCoursesCallData.PlayDate, providerCoursesCallData.FromTime,
+                var providers = await _iMasterProviderService.GetProvidersWithCourses(response.Result.data.VendorID, response.Result.data.SessionID, response.Result.data.AccessToken, "ES-es", providerCoursesCallData.PlayDate, providerCoursesCallData.FromTime,
                     providerCoursesCallData.ToTime, providerCoursesCallData.Players, providerCoursesCallData.FromPrice, providerCoursesCallData.ToPrice, providerCoursesCallData.PageSize, providerCoursesCallData.PageNum);
+                foreach (var p in providers.ProvidersList)
+                {
+                    foreach (var c in p.Courses)
+                    {
+                        var course = _courseService.GetByImasterId(int.Parse(c.CourseID));
+                        if (course != null)
+                        {
+                            c.ImageUrl = (course.ImageUrl != null && course.ImageUrl != "") ? course.ImageUrl : "";
+                            c.LocationString = (course.LocationString != null && course.LocationString != "") ? course.LocationString : "";
+                               
+                        }
+                        else
+                        {
+                            c.ImageUrl = "";
+                            c.LocationString = "";
+                        }
+                    }
+                }
+                responseObject.Body = providers;
                 return responseObject;
                 
             }

@@ -9,11 +9,8 @@ namespace ObjectsLibrary.Entities
     public class CourseEntity
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public bool NineHoles { get; set; }
-        public bool EighteenHoles { get; set; }
-        public Guid ServiceProviderId { get; set; }
-
-        public ServiceProviderEntity ServiceProvider { get; set; }
+        public string? LocationString { get; set; }
+        public string? ImageUrl { get; set; }
+        public int IMasterCourseId { get; set; }
     }
 }

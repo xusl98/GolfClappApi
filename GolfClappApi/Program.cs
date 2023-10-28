@@ -102,7 +102,13 @@ builder.Services.AddScoped<IIMasterProviderCourseService, IMasterProviderCourseS
 builder.Services.AddScoped<IIMasterProviderService, IMasterProviderService>();
 builder.Services.AddScoped<IIMasterDayAvailabilityService, IMasterDayAvailabilityService>();
 
+builder.Services.AddScoped<IAppIsBlockedRepository, AppIsBlockedRepository>();
+builder.Services.AddScoped<IAppIsBlockedService, AppIsBlockedService>();
+
+
 builder.Services.AddScoped<UserManager<UserEntity>, UserManager<UserEntity>>();
+
+
 
 
 

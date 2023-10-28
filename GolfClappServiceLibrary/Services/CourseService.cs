@@ -47,6 +47,12 @@ namespace GolfClappServiceLibrary.Services
             return _mapper.Map<CourseEntity, CourseDTO>(_courseRepository.Get(id));           
         }
 
+        public CourseDTO GetByImasterId(int id)
+        {
+
+            return _mapper.Map<CourseEntity, CourseDTO>(_courseRepository.GetByImasterId(id));
+        }
+
         public List<CourseDTO> Get()
         {
             return _mapper.Map<List<CourseEntity>, List<CourseDTO>>(_courseRepository.Get());

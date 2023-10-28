@@ -12,6 +12,7 @@ namespace GolfClapp.DB.Infrastructure.RepositoryInterfaces
         CourseEntity Save(CourseEntity courseEntity);
         List<CourseEntity> Get();
         CourseEntity Get(Guid id);
+        CourseEntity GetByImasterId(int id);
         CourseEntity Remove(Guid id);
     }
 }

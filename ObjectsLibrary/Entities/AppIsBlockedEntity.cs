@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ObjectsLibrary.Entities
 {
-    public class ServiceProviderEntity
+    public class AppIsBlockedEntity
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-
+        public bool IsBlocked { get; set; }
+        public string MinVersion { get; set; }
     }
 }

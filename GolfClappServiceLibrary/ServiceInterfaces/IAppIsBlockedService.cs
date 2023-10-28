@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace GolfClappServiceLibrary.ServiceInterfaces
 {
-    public interface ICourseService
+    public interface IAppIsBlockedService
     {        
-        BaseResponseDTO Save(CourseDTO course);
-        CourseDTO GetById(Guid id);
-        CourseDTO GetByImasterId(int id);
-        List<CourseDTO> Get();
-        BaseResponseDTO Remove(Guid id);
+        AppIsBlockedDTO Get();
 
 
     }

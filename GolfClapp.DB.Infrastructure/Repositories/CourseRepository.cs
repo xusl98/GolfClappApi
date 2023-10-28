@@ -27,6 +27,10 @@ namespace GolfClapp.DB.Infrastructure.Repositories
         {
             return _context.Courses.FirstOrDefault(c => c.Id == id);
         }
+        public CourseEntity GetByImasterId(int id)
+        {
+            return _context.Courses.FirstOrDefault(c => c.IMasterCourseId== id);
+        }
 
         public CourseEntity Remove(Guid id)
         {

@@ -1,10 +1,12 @@
 ﻿CREATE TABLE [dbo].[Course] (
-    [Id]                UNIQUEIDENTIFIER NOT NULL,
-    [Name]              VARCHAR (50)     NOT NULL,
-    [NineHoles]         BIT              NOT NULL,
-    [EighteenHoles]     BIT              NOT NULL,
-    [ServiceProviderId] UNIQUEIDENTIFIER NOT NULL,
-    CONSTRAINT [PK_Course] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Course_ServiceProvider] FOREIGN KEY ([ServiceProviderId]) REFERENCES [dbo].[ServiceProvider] ([Id])
+    [Id]              UNIQUEIDENTIFIER NOT NULL,
+    [LocationString]  VARCHAR (50)     NULL,
+    [ImageUrl]        VARCHAR (50)     NULL,
+    [IMasterCourseId] INT              NOT NULL,
+    CONSTRAINT [PK_Course] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+
+
+
 

@@ -34,6 +34,8 @@ namespace iMasterLibrary.Objects
         public int Holes { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+        public string LocationString { get; set; }
+        public string ImageUrl { get; set; }
         public List<string> TimesAvailable { get; set; } //list of the hours
         public int Price { get; set; }
     }
