@@ -16,6 +16,6 @@ namespace ObjectsLibrary.Entities
         public int ProviderCourseId { get; set; }
         public int Holes { get; set; }
 
-        public CourseEntity? Course { get; set; }
+       
     }
 }

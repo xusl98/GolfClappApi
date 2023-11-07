@@ -20,6 +20,8 @@ namespace GolfClapp.DB.Infrastructure
         public DbSet<GameEntity> Games { get; set; }
         public DbSet<GameUserEntity> GameUsers { get; set; }
         public DbSet<AppIsBlockedEntity> AppIsBlocked { get; set; }
+        public DbSet<FriendshipRequestEntity> FriendshipRequests { get; set; }
+        public DbSet<FriendshipEntity> Friendships { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +33,8 @@ namespace GolfClapp.DB.Infrastructure
             modelBuilder.ApplyConfiguration(new GameMapping());
             modelBuilder.ApplyConfiguration(new GameUserMapping());
             modelBuilder.ApplyConfiguration(new AppIsBlockedMapping());
+            modelBuilder.ApplyConfiguration(new FriendshipRequestMapping());
+            modelBuilder.ApplyConfiguration(new FriendshipMapping());
 
         }
     }

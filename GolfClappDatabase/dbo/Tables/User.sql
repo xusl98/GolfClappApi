@@ -20,8 +20,11 @@
     [AccessFailedCount]    INT                NOT NULL,
     [UserApiKey]           VARCHAR (MAX)      NULL,
     [GoogleSignIn]         BIT                NULL,
-    CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([Id] ASC)
+    CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [unique_userName] UNIQUE NONCLUSTERED ([UserName] ASC)
 );
+
+
 
 
 

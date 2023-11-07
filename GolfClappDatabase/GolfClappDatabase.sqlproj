@@ -74,5 +74,7 @@
     <Build Include="dbo\Tables\Game.sql" />
     <Build Include="dbo\Tables\Course.sql" />
     <Build Include="dbo\Tables\AppIsBlocked.sql" />
+    <Build Include="dbo\Tables\Friendship.sql" />
+    <Build Include="dbo\Tables\FriendRequest.sql" />
   </ItemGroup>
 </Project>

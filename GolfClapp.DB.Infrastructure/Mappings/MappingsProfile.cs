@@ -22,6 +22,8 @@ namespace GolfClapp.DB.Infrastructure.Mappings
             CreateMap<GameUserEntity, GameUserDTO>().ReverseMap();
             CreateMap<IMasterProviderCourse, IMasterProviderCourseAvailability>().ReverseMap();
             CreateMap<AppIsBlockedEntity, AppIsBlockedDTO>().ReverseMap();
+            CreateMap<FriendshipEntity, FriendshipDTO>().ReverseMap();
+            CreateMap<FriendshipRequestEntity, FriendshipRequestDTO>().ReverseMap();
         }
     }
 }
