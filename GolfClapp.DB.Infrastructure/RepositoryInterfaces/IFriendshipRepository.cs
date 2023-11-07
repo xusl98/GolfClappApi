@@ -10,6 +10,7 @@ namespace GolfClapp.DB.Infrastructure.RepositoryInterfaces
     public interface IFriendshipRepository
     {
         FriendshipEntity Save(FriendshipEntity friendshipEntity);
+        List<FriendshipEntity> GetByUserId(Guid userId);
         List<FriendshipEntity> Get();
         FriendshipEntity Get(Guid id);
         FriendshipEntity Remove(Guid id);

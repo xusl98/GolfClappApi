@@ -41,6 +41,13 @@ namespace GolfClappServiceLibrary.Services
         {
            return _mapper.Map<List<FriendshipRequestEntity>, List<FriendshipRequestDTO>>(_friendshipRequestRepository.GetByUserId(userId));
         }
+
+        public List<UserDTO> GetFriends(Guid userId)
+        {
+            var friendships = _friendshipRepository.GetByUserId(userId);
+
+            return _mapper.Map<List<UserEntity>, List<UserDTO>>(friendships.Select(f => f.User1Id != userId ? f.User1 : f.User2).ToList());
+        }
         
     }
 }

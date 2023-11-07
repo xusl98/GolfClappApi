@@ -105,6 +105,11 @@ builder.Services.AddScoped<IIMasterDayAvailabilityService, IMasterDayAvailabilit
 builder.Services.AddScoped<IAppIsBlockedRepository, AppIsBlockedRepository>();
 builder.Services.AddScoped<IAppIsBlockedService, AppIsBlockedService>();
 
+builder.Services.AddScoped<IFriendshipRepository, FriendshipRepository>();
+builder.Services.AddScoped<IFriendshipRequestRepository, FriendshipRequestRepository>();
+builder.Services.AddScoped<IFriendshipManagementService, FriendshipManagementService>();
+
+
 
 builder.Services.AddScoped<UserManager<UserEntity>, UserManager<UserEntity>>();
 

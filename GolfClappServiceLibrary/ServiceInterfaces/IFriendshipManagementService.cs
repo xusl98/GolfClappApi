@@ -13,5 +13,6 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
     {
         FriendshipRequestDTO SendRequest(Guid senderId, Guid receiverId);
         List<FriendshipRequestDTO> GetFriendRequests(Guid userId);
+        List<UserDTO> GetFriends(Guid userId);
     }
 }
