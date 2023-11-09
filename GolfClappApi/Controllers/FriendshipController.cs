@@ -72,8 +72,8 @@ namespace GolfClappApi.Controllers
         }
 
         [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
-        [HttpGet("GetFriends")]
-        public async Task<ObjectResponseDTO> GetFriends()
+        [HttpPost("GetFriends")]
+        public async Task<ObjectResponseDTO> GetFriends([FromBody] string nameFilter)
         {
 
             var responseObject = new ObjectResponseDTO();
@@ -81,11 +81,14 @@ namespace GolfClappApi.Controllers
             {
                 string apiKey = HttpContext.Request.Headers["Api-Key"];
                 UserDTO user = _userService.GetUserByApiKey(apiKey);
-                var response = _friendshipManagementService.GetFriends(user.Id);
+                var respObject = new GetFriendsResponseDTO();
+                respObject.Friends = _friendshipManagementService.GetFriends(user.Id, nameFilter);
+
+
 
                 responseObject.StatusCode = 200;
 
-                responseObject.Body = response;
+                responseObject.Body = respObject;
                 return responseObject;
 
             }
@@ -112,7 +115,7 @@ namespace GolfClappApi.Controllers
 
                 return Ok("Request sent successfully.");
 
-                
+
 
             }
             catch (Exception ex)
@@ -122,6 +125,11 @@ namespace GolfClappApi.Controllers
             }
         }
 
+    }
+
+    public class GetFriendsResponseDTO
+    {
+        public List<UserDTO> Friends { get; set; }
     }
 
 

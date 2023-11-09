@@ -33,6 +33,7 @@ namespace GolfClapp.DB.Infrastructure
             modelBuilder.ApplyConfiguration(new GameMapping());
             modelBuilder.ApplyConfiguration(new GameUserMapping());
             modelBuilder.ApplyConfiguration(new AppIsBlockedMapping());
+            modelBuilder.ApplyConfiguration(new UserMapping());
             modelBuilder.ApplyConfiguration(new FriendshipRequestMapping());
             modelBuilder.ApplyConfiguration(new FriendshipMapping());
 

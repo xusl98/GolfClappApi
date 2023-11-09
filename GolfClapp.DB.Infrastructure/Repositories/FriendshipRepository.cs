@@ -27,9 +27,21 @@ namespace GolfClapp.DB.Infrastructure.Repositories
         {
             return _context.Friendships.FirstOrDefault(g => g.Id == id);
         }
-        public List<FriendshipEntity> GetByUserId(Guid userId)
+        public List<FriendshipEntity> GetByUserId(Guid userId, string nameFilter)
         {
-            return _context.Friendships.Where(f => f.User1Id == userId || f.User2Id == userId).ToList();
+            var filter = nameFilter.ToLower();
+            var friendships = _context.Friendships.Include(f => f.User1).Include(f => f.User2).Where(f => f.User1Id == userId || f.User2Id == userId).ToList();
+            if (nameFilter != null && nameFilter.Length > 0)
+            {
+                return friendships.Where(f => 
+                (f.User2Id != userId && (f.User2.UserName.ToLower().Contains(filter) || f.User2.Name.ToLower().Contains(filter) || f.User2.Surname.ToLower().Contains(filter))) 
+                || 
+                (f.User1Id != userId && (f.User1.UserName.ToLower().Contains(filter) || f.User1.Name.ToLower().Contains(filter) || f.User1.Surname.ToLower().Contains(filter)))).ToList();
+            }
+            else
+            {
+                return friendships.ToList();
+            }
         }
 
         public FriendshipEntity Remove(Guid id)
