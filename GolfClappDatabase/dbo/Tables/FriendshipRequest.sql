@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[FriendRequest] (
+﻿CREATE TABLE [dbo].[FriendshipRequest] (
     [Id]         UNIQUEIDENTIFIER NOT NULL,
     [SenderId]   UNIQUEIDENTIFIER NULL,
     [ReceiverId] UNIQUEIDENTIFIER NULL,

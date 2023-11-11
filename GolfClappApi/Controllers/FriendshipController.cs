@@ -45,31 +45,7 @@ namespace GolfClappApi.Controllers
         //        return BadRequest();
         //    }
         //}
-        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
-        [HttpGet("GetFriendRequests")]
-        public async Task<ObjectResponseDTO> GetFriendRequests()
-        {
-
-            var responseObject = new ObjectResponseDTO();
-            try
-            {
-                string apiKey = HttpContext.Request.Headers["Api-Key"];
-                UserDTO user = _userService.GetUserByApiKey(apiKey);
-                var response = _friendshipManagementService.GetFriendRequests(user.Id);
-
-                responseObject.StatusCode = 200;
-
-                responseObject.Body = response;
-                return responseObject;
-
-            }
-            catch (Exception ex)
-            {
-                responseObject.Message = ex.Message;
-                return responseObject;
-            }
-
-        }
+        
 
         [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
         [HttpPost("GetFriends")]
@@ -83,6 +59,64 @@ namespace GolfClappApi.Controllers
                 UserDTO user = _userService.GetUserByApiKey(apiKey);
                 var respObject = new GetFriendsResponseDTO();
                 respObject.Friends = _friendshipManagementService.GetFriends(user.Id, nameFilter);
+
+
+
+                responseObject.StatusCode = 200;
+
+                responseObject.Body = respObject;
+                return responseObject;
+
+            }
+            catch (Exception ex)
+            {
+                responseObject.Message = ex.Message;
+                return responseObject;
+            }
+
+        }
+
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpPost("GetReceivedRequests")]
+        public async Task<ObjectResponseDTO> GetReceivedRequests()
+        {
+
+            var responseObject = new ObjectResponseDTO();
+            try
+            {
+                string apiKey = HttpContext.Request.Headers["Api-Key"];
+                UserDTO user = _userService.GetUserByApiKey(apiKey);
+                var respObject = new GetFriendRequestsResponseDTO();
+                respObject.FriendRequests = _friendshipManagementService.GetReceivedRequests(user.Id);
+
+
+
+                responseObject.StatusCode = 200;
+
+                responseObject.Body = respObject;
+                return responseObject;
+
+            }
+            catch (Exception ex)
+            {
+                responseObject.Message = ex.Message;
+                return responseObject;
+            }
+
+        }
+
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpPost("GetSentRequests")]
+        public async Task<ObjectResponseDTO> GetSentRequests()
+        {
+
+            var responseObject = new ObjectResponseDTO();
+            try
+            {
+                string apiKey = HttpContext.Request.Headers["Api-Key"];
+                UserDTO user = _userService.GetUserByApiKey(apiKey);
+                var respObject = new GetFriendRequestsResponseDTO();
+                respObject.FriendRequests = _friendshipManagementService.GetSentRequests(user.Id);
 
 
 
@@ -125,11 +159,59 @@ namespace GolfClappApi.Controllers
             }
         }
 
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpPost("AcceptFriendRequest")]
+        public IActionResult AcceptFriendRequest([FromBody] Guid friendRequestId)
+        {
+            try
+            {
+                
+
+                _friendshipManagementService.AcceptFriendRequest(friendRequestId);
+
+                return Ok("Request sent successfully.");
+
+
+
+            }
+            catch (Exception ex)
+            {
+                _logger.SaveErrorLog(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpPost("DeclineFriendRequest")]
+        public IActionResult DeclineFriendRequest([FromBody] Guid friendRequestId)
+        {
+            try
+            {
+                
+
+                _friendshipManagementService.DeclineFriendRequest(friendRequestId);
+
+                return Ok("Request sent successfully.");
+
+
+
+            }
+            catch (Exception ex)
+            {
+                _logger.SaveErrorLog(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 
     public class GetFriendsResponseDTO
     {
         public List<UserDTO> Friends { get; set; }
+    }
+    public class GetFriendRequestsResponseDTO
+    {
+        public List<FriendshipRequestDTO> FriendRequests { get; set; }
     }
 
 

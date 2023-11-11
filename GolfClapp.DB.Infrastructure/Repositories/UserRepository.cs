@@ -23,6 +23,11 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             return _context.Users.FirstOrDefault(u => u.Id == id);
         }
 
+        public List<UserEntity> GetByNameFilter(Guid userId, string nameFilter)
+        {
+            return _context.Users.Where(u => u.UserName.ToLower().Contains(nameFilter.ToLower())).ToList();
+        }
+
         public UserEntity Save(UserEntity entity) 
         {
             var g = _context.Users.FirstOrDefault(g => g.Id == entity.Id);

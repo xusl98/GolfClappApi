@@ -53,6 +53,11 @@ namespace GolfClappServiceLibrary.Services
             }
         }
 
+        public List<UserDTO> GetUsersByNameFilter(Guid userId, string nameFilter)
+        {
+            return _mapper.Map<List<UserEntity>, List<UserDTO>>(_userRepository.GetByNameFilter(userId, nameFilter));
+        }
+
         public void EditUserValues(UserUpdateObject userUpdateObject, string apiKey)
         {
             var user = GetUserByApiKey(apiKey);

@@ -12,7 +12,9 @@ namespace GolfClapp.DB.Infrastructure.RepositoryInterfaces
         FriendshipRequestEntity Save(FriendshipRequestEntity friendshipEntity);
         List<FriendshipRequestEntity> Get();
         FriendshipRequestEntity Get(Guid id);
-        List<FriendshipRequestEntity> GetByUserId(Guid userId);
+        FriendshipRequestEntity GetBySenderAndReceiverIds(Guid senderId, Guid receiverId);
+        List<FriendshipRequestEntity> GetReceivedRequests(Guid userId);
+        List<FriendshipRequestEntity> GetSentRequests(Guid userId);
         FriendshipRequestEntity Remove(Guid id);
 
     }

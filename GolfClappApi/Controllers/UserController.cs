@@ -1,4 +1,5 @@
 ﻿using GolfClappServiceLibrary.ServiceInterfaces;
+using GolfClappServiceLibrary.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,42 @@ namespace GolfClappApi.Controllers
             return Ok(_userService.GetUserById(id));
         }
 
-        
+
+
+
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpPost("GetUsersByNameFilter")]
+        public ObjectResponseDTO GetUsersByNameFilter([FromBody] string nameFilter)
+        {
+            var responseObject = new ObjectResponseDTO();
+            try
+            {
+                string apiKey = HttpContext.Request.Headers["Api-Key"];
+                UserDTO user = _userService.GetUserByApiKey(apiKey);
+                var respObject = new GetUsersResponseDTO();
+                respObject.Users = _userService.GetUsersByNameFilter(user.Id, nameFilter);
+
+
+
+                responseObject.StatusCode = 200;
+
+                responseObject.Body = respObject;
+                return responseObject;
+
+            }
+            catch (Exception ex)
+            {
+                responseObject.Message = ex.Message;
+                return responseObject;
+            }
+        }
+
+
+    }
+
+
+    public class GetUsersResponseDTO
+    {
+        public List<UserDTO> Users { get; set; }
     }
 }

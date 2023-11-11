@@ -15,5 +15,6 @@ namespace GolfClapp.DB.Infrastructure.RepositoryInterfaces
         bool IsUserApiKeyValid(string userApiKey);
         public string GetUserAPiKeyByEmail(string email);
         UserEntity GetByUserAPiKey(string userApiKey);
+        List<UserEntity> GetByNameFilter(Guid userId, string nameFilter);
     }
 }

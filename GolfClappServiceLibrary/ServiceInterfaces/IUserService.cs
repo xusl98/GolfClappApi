@@ -15,5 +15,6 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
         void EditUserValues(UserUpdateObject userUpdateObject, string apiKey);
         BaseResponseDTO Save(UserDTO user);
         UserDTO GetUserByApiKey(string id);
+        List<UserDTO> GetUsersByNameFilter(Guid userId, string nameFilter);
     }
 }

@@ -28,9 +28,19 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             return _context.FriendshipRequests.FirstOrDefault(g => g.Id == id);
         }
 
-        public List<FriendshipRequestEntity> GetByUserId(Guid userId)
+        public FriendshipRequestEntity GetBySenderAndReceiverIds(Guid senderId, Guid receiverId)
         {
-            return _context.FriendshipRequests.Where(f => f.ReceiverId == userId).ToList();
+            return _context.FriendshipRequests.FirstOrDefault(f => f.SenderId == senderId && f.ReceiverId == receiverId);
+        }
+
+
+        public List<FriendshipRequestEntity> GetReceivedRequests(Guid userId)
+        {
+            return _context.FriendshipRequests.Include(f => f.Sender).Where(f => f.ReceiverId == userId).ToList();
+        }
+        public List<FriendshipRequestEntity> GetSentRequests(Guid userId)
+        {
+            return _context.FriendshipRequests.Include(f => f.Receiver).Where(f => f.SenderId == userId).ToList();
         }
 
         public FriendshipRequestEntity Remove(Guid id)
@@ -48,10 +58,7 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             {
                 _context.FriendshipRequests.Add(friendshipRequest);
             }
-            else
-            {
-                _context.Entry(g).CurrentValues.SetValues(friendshipRequest);
-            }
+            
             _context.SaveChanges();
             return friendshipRequest;
         }

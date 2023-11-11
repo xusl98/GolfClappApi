@@ -12,7 +12,11 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
     public interface IFriendshipManagementService
     {
         FriendshipRequestDTO SendRequest(Guid senderId, Guid receiverId);
-        List<FriendshipRequestDTO> GetFriendRequests(Guid userId);
+        List<FriendshipRequestDTO> GetReceivedRequests(Guid userId);
+        List<FriendshipRequestDTO> GetSentRequests(Guid userId);
         List<UserDTO> GetFriends(Guid userId, string nameFilter);
+        void AcceptFriendRequest(Guid friendRequestId);
+        void DeclineFriendRequest(Guid friendRequestId);
+
     }
 }
