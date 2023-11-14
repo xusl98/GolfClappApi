@@ -143,8 +143,22 @@ namespace GolfClappApi.Controllers
             var responseObject = new ObjectResponseDTO();
             try
             {
+                var isGuid = Guid.TryParse(request.UserId, out var idGuid);
+                Guid userId;
+                if (request.UserId != null && isGuid)
+                {
+                    userId = idGuid;
+                }
+                else
+                {
+                    string apiKey = HttpContext.Request.Headers["Api-Key"];
+                    UserDTO user = _userService.GetUserByApiKey(apiKey);
+                    userId = user.Id;
+                }
+                
+
                 var resp = new GetByDateResponseDTO();
-                resp.Bookings = _gameService.GetByDate(request.Date, request.OlderBookings);
+                resp.Bookings = _gameService.GetByDate(request.Date, request.OlderBookings, userId);
                 responseObject.StatusCode = 200;
                 responseObject.Body = resp;
                 return responseObject;
@@ -165,6 +179,7 @@ namespace GolfClappApi.Controllers
     {
         public DateTime Date { get; set; }
         public bool OlderBookings { get; set; }
+        public String UserId { get; set; }
     }
     public class GetByDateResponseDTO
     {

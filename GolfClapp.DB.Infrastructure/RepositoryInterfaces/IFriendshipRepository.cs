@@ -14,5 +14,6 @@ namespace GolfClapp.DB.Infrastructure.RepositoryInterfaces
         List<FriendshipEntity> Get();
         FriendshipEntity Get(Guid id);
         FriendshipEntity Remove(Guid id);
+        int GetNumberOfFriends(Guid userId);
     }
 }

@@ -53,9 +53,9 @@ namespace GolfClappServiceLibrary.Services
             return _mapper.Map<List<GameEntity>, List<GameDTO>>(_gameRepository.Get());
         }
 
-        public List<GameDTO> GetByDate(DateTime date, bool olderBookings)
+        public List<GameDTO> GetByDate(DateTime date, bool olderBookings, Guid userId)
         {
-            return _mapper.Map<List<GameEntity>, List<GameDTO>>(_gameRepository.GetByDate(date, olderBookings));
+            return _mapper.Map<List<GameEntity>, List<GameDTO>>(_gameRepository.GetByDate(date, olderBookings, userId));
         }
 
         public BaseResponseDTO Remove(Guid id)

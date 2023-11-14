@@ -13,16 +13,18 @@ namespace GolfClappApi.Controllers
     {
 
         private readonly IUserService _userService;
+        private readonly IFriendshipManagementService _friendshipManagementService;
         
 
         
 
         private readonly ILogger<UserController> _logger;
 
-        public UserController(ILogger<UserController> logger, IUserService userService)
+        public UserController(ILogger<UserController> logger, IUserService userService, IFriendshipManagementService friendshipManagementService)
         {
             _logger = logger;
             _userService = userService;
+            _friendshipManagementService = friendshipManagementService;
         }
 
 
@@ -32,7 +34,9 @@ namespace GolfClappApi.Controllers
         public ActionResult GetUserById(string userId)
         {
             var id = Guid.Parse(userId);
-            return Ok(_userService.GetUserById(id));
+            var user= _userService.GetUserById(id);
+            user.NumberOfFriends = _friendshipManagementService.GetNumberOfFriends(id);
+            return Ok(user);
         }
 
 

@@ -66,5 +66,10 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             _context.SaveChanges();
             return friendship;
         }
+
+        public int GetNumberOfFriends(Guid userId)
+        {
+            return _context.Friendships.Where(f => (f.User1Id == userId) || (f.User2Id == userId)).Count();
+        }
     }
 }

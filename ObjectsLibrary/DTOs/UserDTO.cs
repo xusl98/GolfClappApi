@@ -18,5 +18,6 @@ namespace ObjectsLibrary.DTOs
         public string Country { get; set; }
         public string? License { get; set; }
         public bool? GoogleSignIn { get; set; }
+        public int NumberOfFriends { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
         GameDTO GetById(Guid id);
         List<GameDTO> Get();
         BaseResponseDTO Remove(Guid id);
-        List<GameDTO> GetByDate(DateTime date, bool olderBookings);
+        List<GameDTO> GetByDate(DateTime date, bool olderBookings, Guid userId);
 
 
     }

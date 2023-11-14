@@ -32,15 +32,25 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             return _context.Games.FirstOrDefault(g => g.ProviderCourseId == providerCourseId && g.Date == date);
         }
 
-        public List<GameEntity> GetByDate(DateTime date, bool olderBookings)
+        public List<GameEntity> GetByDate(DateTime date, bool olderBookings, Guid userId)
         {
+            var gamesForUser = _context.Games
+            .Join(
+                _context.GameUsers,
+                game => game.Id,
+                gameUser => gameUser.GameId,
+                (game, gameUser) => new { Game = game, GameUser = gameUser }
+            )
+            .Where(joinResult => joinResult.GameUser.UserId == userId)
+            .Select(joinResult => joinResult.Game)
+            .ToList();
             if (!olderBookings)
-                return _context.Games.Where(g => g.Date >= date).OrderBy(g => g.Date).ToList();
+                return gamesForUser.Where(g => g.Date >= date).OrderBy(g => g.Date).ToList();
             else
             {
                 var list = new List<GameEntity>();
-                list.AddRange(_context.Games.Where(g => g.Date >= date).OrderBy(g => g.Date).ToList());
-                list.AddRange(_context.Games.Where(g => g.Date < date).OrderBy(g => g.Date).ToList());
+                list.AddRange(gamesForUser.Where(g => g.Date >= date).OrderBy(g => g.Date).ToList());
+                list.AddRange(gamesForUser.Where(g => g.Date < date).OrderBy(g => g.Date).ToList());
                 return list;
 
             }

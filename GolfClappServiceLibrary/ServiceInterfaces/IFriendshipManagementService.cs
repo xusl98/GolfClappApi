@@ -17,6 +17,7 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
         List<UserDTO> GetFriends(Guid userId, string nameFilter);
         void AcceptFriendRequest(Guid friendRequestId);
         void DeclineFriendRequest(Guid friendRequestId);
+        int GetNumberOfFriends(Guid userId);
 
     }
 }
