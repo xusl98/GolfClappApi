@@ -90,6 +90,30 @@ namespace GolfClappApi.Controllers
             return Ok(response);
         }
 
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpGet("GetMyUser")]
+        public ActionResult GetMyUser()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Bad credentials");
+            }
+            
+            string apiKey = HttpContext.Request.Headers["Api-Key"];
+            var user = _userService.GetUserByApiKey(apiKey);
+
+            if (user == null)
+            {
+                return BadRequest("Bad credentials");
+            }
+
+
+
+            user.Password = "";
+
+            return Ok(user);
+        }
+
         [HttpPost("GetUserApiKeyByEmail")]
         public async Task<ActionResult<string>> GetUserApiKeyByEmail(string email)
         {

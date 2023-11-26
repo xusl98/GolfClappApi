@@ -53,6 +53,20 @@ namespace GolfClappServiceLibrary.Services
             }
         }
 
+        UserEntity _GetUserEntityByApiKey(string id)
+        {
+            try
+            {
+                var user = _userRepository.GetByUserAPiKey(id);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logService.SaveErrorLog(ex.Message);
+                return null;
+            }
+        }
+
         public List<UserDTO> GetUsersByNameFilter(Guid userId, string nameFilter)
         {
             return _mapper.Map<List<UserEntity>, List<UserDTO>>(_userRepository.GetByNameFilter(userId, nameFilter));
@@ -60,7 +74,7 @@ namespace GolfClappServiceLibrary.Services
 
         public void EditUserValues(UserUpdateObject userUpdateObject, string apiKey)
         {
-            var user = GetUserByApiKey(apiKey);
+            var user = _GetUserEntityByApiKey(apiKey);
             if (userUpdateObject.Name != null)
             {
                 user.Name = userUpdateObject.Name;
@@ -68,6 +82,10 @@ namespace GolfClappServiceLibrary.Services
             if (userUpdateObject.Email != null) 
             { 
                 user.Email = userUpdateObject.Email;
+            }
+            if (userUpdateObject.Username != null)
+            {
+                user.UserName = userUpdateObject.Username;
             }
             if (userUpdateObject.Surname != null) 
             {
@@ -82,7 +100,7 @@ namespace GolfClappServiceLibrary.Services
                 user.License = userUpdateObject.License;
             }
 
-            _userRepository.Save(_mapper.Map<UserDTO, UserEntity>(user));
+            _userRepository.Save(user);
         }
 
         public BaseResponseDTO Save(UserDTO user)

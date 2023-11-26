@@ -90,5 +90,10 @@ namespace GolfClappServiceLibrary.Services
             return _friendshipRepository.GetNumberOfFriends(userId);
         }
 
+        public void RemoveFriend(Guid userId, Guid friendUserId)
+        {
+            _friendshipRepository.Remove(userId, friendUserId);
+        }
+
     }
 }

@@ -203,6 +203,32 @@ namespace GolfClappApi.Controllers
             }
         }
 
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpPost("RemoveFriend")]
+        public IActionResult RemoveFriend([FromBody] Guid friendUserId)
+        {
+            try
+            {
+
+                string apiKey = HttpContext.Request.Headers["Api-Key"];
+                UserDTO user = _userService.GetUserByApiKey(apiKey);
+
+                _friendshipManagementService.RemoveFriend(user.Id, friendUserId);
+
+                return Ok("Request sent successfully.");
+
+
+
+            }
+            catch (Exception ex)
+            {
+                _logger.SaveErrorLog(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
     }
 
     public class GetFriendsResponseDTO

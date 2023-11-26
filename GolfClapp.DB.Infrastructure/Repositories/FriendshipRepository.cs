@@ -52,6 +52,14 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             return g;            
         }
 
+        public FriendshipEntity Remove(Guid userId, Guid friendUserId)
+        {
+            var g = _context.Friendships.FirstOrDefault(g => (g.User1Id == userId && g.User2Id == friendUserId) || (g.User2Id == userId && g.User1Id == friendUserId));
+            _context.Friendships.Remove(g);
+            _context.SaveChanges();
+            return g;
+        }
+
         public FriendshipEntity Save(FriendshipEntity friendship)
         {
             var g = _context.Friendships.FirstOrDefault(g => g.Id == friendship.Id);

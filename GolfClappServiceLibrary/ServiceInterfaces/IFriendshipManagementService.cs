@@ -18,6 +18,7 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
         void AcceptFriendRequest(Guid friendRequestId);
         void DeclineFriendRequest(Guid friendRequestId);
         int GetNumberOfFriends(Guid userId);
+        void RemoveFriend(Guid userId, Guid friendUserId);
 
     }
 }
