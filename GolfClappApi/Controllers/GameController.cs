@@ -109,18 +109,11 @@ namespace GolfClappApi.Controllers
                             Date = result,
                             Location = saveAndAddUserRequestDTO.Location,
                             Price = saveAndAddUserRequestDTO.Price,
-                            ProviderCourseId = saveAndAddUserRequestDTO.ProviderCourseId
+                            ProviderCourseId = saveAndAddUserRequestDTO.ProviderCourseId,
+                            PackageCombination = Newtonsoft.Json.JsonConvert.SerializeObject(saveAndAddUserRequestDTO.PackageCombination)
                         });
-                        _gameUserService.Save(new GameUserDTO()
-                        {
-                            Id = Guid.NewGuid(),
-                            ExternalUser = false,
-                            Name = user.Name + " " + user.Surname,
-                            GameId = game.Id,
-                            Score = 0,
-                            UserId = user.Id
-                            
-                        });
+
+                        _gameUserService.Save(saveAndAddUserRequestDTO.UsersIds, game.Id, user.Id, saveAndAddUserRequestDTO.PayedUsersIds, saveAndAddUserRequestDTO.NonUserPlayers, saveAndAddUserRequestDTO.PricePerPart);
 
 
                         //scope.Complete();

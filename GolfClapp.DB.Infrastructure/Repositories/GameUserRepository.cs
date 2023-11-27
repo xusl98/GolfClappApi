@@ -50,5 +50,24 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             _context.SaveChanges();
             return gameUser;
         }
+
+        public List<GameUserEntity> Save(List<GameUserEntity> gameUsers)
+        {
+            foreach (var gameUser in gameUsers)
+            {
+                var g = _context.GameUsers.FirstOrDefault(g => g.Id == gameUser.Id);
+                if (g == null)
+                {
+                    _context.GameUsers.Add(gameUser);
+                }
+                else
+                {
+                    _context.Entry(g).CurrentValues.SetValues(gameUser);
+                }
+            }
+            
+            _context.SaveChanges();
+            return gameUsers;
+        }
     }
 }

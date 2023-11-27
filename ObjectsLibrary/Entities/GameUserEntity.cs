@@ -14,6 +14,8 @@ namespace ObjectsLibrary.Entities
         public string Name { get; set; }
         public bool ExternalUser { get; set; }
         public int Score { get; set; }
+        public double Price { get; set; }
+        public bool HasPayed { get; set; }
 
         public UserEntity User { get; set; }
         public GameEntity Game { get; set; }

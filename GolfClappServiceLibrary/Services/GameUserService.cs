@@ -16,11 +16,13 @@ namespace GolfClappServiceLibrary.Services
     {
         private readonly IGameUserRepository _gameUserRepository;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
         
-        public GameUserService(IMapper mapper, IGameUserRepository gameUserRepository)
+        public GameUserService(IMapper mapper, IGameUserRepository gameUserRepository, IUserService userService)
         {
             _mapper = mapper;
             _gameUserRepository = gameUserRepository;
+            _userService = userService;
         }
 
 
@@ -39,6 +41,42 @@ namespace GolfClappServiceLibrary.Services
                 response.Message = ex.Message;
                 return response;
             }            
+        }
+
+        public BaseResponseDTO Save(List<Guid> usersIds, Guid gameId, Guid creatorUserId, List<Guid> payedUsersIds, int nonUserPlayers, double pricePerPart)
+        {
+            var response = new BaseResponseDTO();
+            try
+            {
+                List<GameUserDTO> gU = new List<GameUserDTO>();
+                foreach (var userId in usersIds)
+                {
+                    var user = _userService.GetUserById(userId);
+
+                    var price = (user.Id == creatorUserId) ? (pricePerPart * (nonUserPlayers + 1)) : pricePerPart;
+                    var hasPayed = (payedUsersIds.Contains(user.Id) || user.Id == creatorUserId);
+                    gU.Add(new GameUserDTO()
+                    {
+                        Id = Guid.NewGuid(),
+                        GameId = gameId,
+                        UserId = userId,
+                        Name = user.Name,
+                        Score = 0,
+                        ExternalUser = false,
+                        HasPayed = hasPayed,
+                        Price = price
+                    });
+                }
+                _gameUserRepository.Save(_mapper.Map<List<GameUserDTO>, List<GameUserEntity>>(gU));
+                response.IsSuccess = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = ex.Message;
+                return response;
+            }
         }
 
         public GameUserDTO GetById(Guid id)

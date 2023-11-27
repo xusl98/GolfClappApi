@@ -14,6 +14,7 @@ namespace GolfClappServiceLibrary.ServiceInterfaces
         GameUserDTO GetById(Guid id);
         List<GameUserDTO> Get();
         BaseResponseDTO Remove(Guid id);
+        BaseResponseDTO Save(List<Guid> usersIds, Guid gameId, Guid creatorUserId, List<Guid> payedUsersIds, int nonUserPlayers, double pricePerPart);
 
 
     }

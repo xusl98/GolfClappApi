@@ -15,6 +15,8 @@ namespace ObjectsLibrary.Entities
         public double Price { get; set; }
         public int ProviderCourseId { get; set; }
         public int Holes { get; set; }
+        public int NumberOfPlayers { get; set; }
+        public string PackageCombination { get; set; }
 
 
     }

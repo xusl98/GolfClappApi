@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iMasterLibrary.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,13 @@ namespace ObjectsLibrary.Entities
         public string CourseName { get; set; }
         public string Location { get; set; }
         public double Price { get; set; }
+        public double PricePerPart { get; set; }
         public int ProviderCourseId { get; set; }
-       
+        public List<Rate> PackageCombination { get; set; }
+        public List<Guid> UsersIds { get; set; }
+        public int NonUserPlayers { get; set; }
+        public List<Guid> PayedUsersIds { get; set; }
+
 
 
     }

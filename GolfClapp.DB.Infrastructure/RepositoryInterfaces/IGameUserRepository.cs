@@ -10,6 +10,7 @@ namespace GolfClapp.DB.Infrastructure.RepositoryInterfaces
     public interface IGameUserRepository
     {
         GameUserEntity Save(GameUserEntity gameUserEntity);
+        List<GameUserEntity> Save(List<GameUserEntity> gameUsers);
         List<GameUserEntity> Get();
         GameUserEntity Get(Guid id);
         GameUserEntity Remove(Guid id);

@@ -38,8 +38,8 @@ namespace iMasterLibrary.Objects
         public int RateID { get; set; }
         public int RateTimeID { get; set; }
         public int RateTypeID { get; set; }
-        public int PackagePriceMenuMultiplier { get; set; }
-        public int PromoCodeID { get; set; }
+        public int? PackagePriceMultiplier { get; set; }
+        public int? PromoCodeID { get; set; }
         public string RateName { get; set; }
         public string RateComments { get; set; }
         public int SellPrice { get; set; }
