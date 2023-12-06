@@ -17,6 +17,7 @@ namespace ObjectsLibrary.Entities
         public int Holes { get; set; }
         public int NumberOfPlayers { get; set; }
         public string PackageCombination { get; set; }
+        public string CreatorUserClientSecret { get; set; }
 
 
     }

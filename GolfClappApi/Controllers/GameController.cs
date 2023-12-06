@@ -110,7 +110,8 @@ namespace GolfClappApi.Controllers
                             Location = saveAndAddUserRequestDTO.Location,
                             Price = saveAndAddUserRequestDTO.Price,
                             ProviderCourseId = saveAndAddUserRequestDTO.ProviderCourseId,
-                            PackageCombination = Newtonsoft.Json.JsonConvert.SerializeObject(saveAndAddUserRequestDTO.PackageCombination)
+                            PackageCombination = Newtonsoft.Json.JsonConvert.SerializeObject(saveAndAddUserRequestDTO.PackageCombination),
+                            CreatorUserClientSecret = saveAndAddUserRequestDTO.CreatorUserClientSecret
                         });
 
                         _gameUserService.Save(saveAndAddUserRequestDTO.UsersIds, game.Id, user.Id, saveAndAddUserRequestDTO.PayedUsersIds, saveAndAddUserRequestDTO.NonUserPlayers, saveAndAddUserRequestDTO.PricePerPart);
