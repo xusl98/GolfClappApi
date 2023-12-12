@@ -18,6 +18,7 @@ namespace ObjectsLibrary.Entities
         public int NumberOfPlayers { get; set; }
         public string PackageCombination { get; set; }
         public string CreatorUserClientSecret { get; set; }
+        public Guid Creator { get; set; }
 
 
     }

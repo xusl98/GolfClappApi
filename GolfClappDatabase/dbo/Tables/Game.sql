@@ -9,8 +9,14 @@
     [PackageCombination]      VARCHAR (MAX)    NOT NULL,
     [NumberOfPlayers]         INT              NOT NULL,
     [CreatorUserClientSecret] VARCHAR (MAX)    NOT NULL,
-    CONSTRAINT [PK_Game] PRIMARY KEY CLUSTERED ([Id] ASC)
+    [Creator]                 UNIQUEIDENTIFIER NULL,
+    CONSTRAINT [PK_Game] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Game_User] FOREIGN KEY ([Creator]) REFERENCES [dbo].[User] ([Id])
 );
+
+
+
+
 
 
 

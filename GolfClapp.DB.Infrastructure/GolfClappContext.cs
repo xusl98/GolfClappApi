@@ -22,6 +22,7 @@ namespace GolfClapp.DB.Infrastructure
         public DbSet<AppIsBlockedEntity> AppIsBlocked { get; set; }
         public DbSet<FriendshipRequestEntity> FriendshipRequests { get; set; }
         public DbSet<FriendshipEntity> Friendships { get; set; }
+        public DbSet<PaymentEntity> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +37,7 @@ namespace GolfClapp.DB.Infrastructure
             modelBuilder.ApplyConfiguration(new UserMapping());
             modelBuilder.ApplyConfiguration(new FriendshipRequestMapping());
             modelBuilder.ApplyConfiguration(new FriendshipMapping());
+            modelBuilder.ApplyConfiguration(new PaymentMapping());
 
         }
     }
