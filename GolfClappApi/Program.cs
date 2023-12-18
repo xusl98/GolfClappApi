@@ -27,8 +27,8 @@ ConfigurationManager configuration = builder.Configuration;
 // Add services to the container.
 
 
-builder.Services.AddDbContext<GolfClappContext>(options => options.UseSqlServer("Server=tcp:golfclappdbserver.database.windows.net,1433;Initial Catalog=golfclappdb;Persist Security Info=False;User ID=jzargo;Password=!sT1LLDr3_mInM#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
-builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer("Server=tcp:golfclappdbserver.database.windows.net,1433;Initial Catalog=golfclappdb;Persist Security Info=False;User ID=jzargo;Password=!sT1LLDr3_mInM#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+builder.Services.AddDbContext<GolfClappContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnStr")));
+builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnStr")));
 //builder.Services.AddDbContext<GolfClappContext>(options => options.UseSqlServer("Data Source=localhost;Initial Catalog=GOLFCLAPP;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Connect Timeout=60;Encrypt=False;Trust Server Certificate=False"));
 //builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer("Data Source=localhost;Initial Catalog=GOLFCLAPP;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Connect Timeout=60;Encrypt=False;Trust Server Certificate=False"));
 
@@ -172,8 +172,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();
