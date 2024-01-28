@@ -19,6 +19,7 @@ namespace ObjectsLibrary.Entities
         public string PackageCombination { get; set; }
         public string CreatorUserClientSecret { get; set; }
         public Guid Creator { get; set; }
+        public bool FullyPaid { get; set; }
 
 
     }

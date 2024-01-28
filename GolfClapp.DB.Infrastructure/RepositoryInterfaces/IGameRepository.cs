@@ -15,5 +15,7 @@ namespace GolfClapp.DB.Infrastructure.RepositoryInterfaces
         GameEntity Get(Guid id);
         GameEntity Remove(Guid id);
         List<GameEntity> GetByDate(DateTime date, bool olderBookings, Guid userId);
+        List<GameEntity> GetByDatePendingPayment(DateTime date, Guid userId);
+        List<GameEntity> GetUnpayedGames();
     }
 }

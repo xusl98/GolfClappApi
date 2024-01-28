@@ -77,5 +77,8 @@
     <Build Include="dbo\Tables\Friendship.sql" />
     <Build Include="dbo\Tables\FriendshipRequest.sql" />
     <Build Include="dbo\Tables\Payment.sql" />
+    <Build Include="dbo\Tables\GameUserEntities.sql" />
+    <Build Include="dbo\Tables\GameEntities.sql" />
+    <Build Include="dbo\Tables\__MigrationHistory.sql" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 using GolfClapp.DB.Infrastructure.Repositories;
 using GolfClapp.DB.Infrastructure.RepositoryInterfaces;
 using GolfClappServiceLibrary.ServiceInterfaces;
+using Microsoft.EntityFrameworkCore;
 using ObjectsLibrary.DTOs;
 using ObjectsLibrary.Entities;
 using System;
@@ -88,6 +89,11 @@ namespace GolfClappServiceLibrary.Services
         public List<GameUserDTO> Get()
         {
             return _mapper.Map<List<GameUserEntity>, List<GameUserDTO>>(_gameUserRepository.Get());
+        }
+
+        public List<GameUserDTO> GetGameUsersByGameId(Guid gameId)
+        {
+            return _mapper.Map<List<GameUserEntity>, List<GameUserDTO>>(_gameUserRepository.GetGameUsersByGameId(gameId));
         }
 
         public BaseResponseDTO Remove(Guid id)

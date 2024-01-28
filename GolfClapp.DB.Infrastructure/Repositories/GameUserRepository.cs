@@ -23,6 +23,11 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             return _context.GameUsers.ToList();
         }
 
+        public List<GameUserEntity> GetGameUsersByGameId(Guid gameId)
+        {
+            return _context.GameUsers.Where(g => g.GameId == gameId).ToList();
+        }
+
         public GameUserEntity Get(Guid id)
         {
             return _context.GameUsers.FirstOrDefault(g => g.Id == id);

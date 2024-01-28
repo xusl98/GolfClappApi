@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient.Server;
+using Newtonsoft.Json;
 using ObjectsLibrary.DTOs;
 using ObjectsLibrary.Entities;
 using System.Dynamic;
@@ -51,7 +52,7 @@ namespace GolfClappApi.Controllers
         {
             try
             {
-                return Ok(_gameService.Get());
+                return Ok(_gameService.GetById(id));
             }
             catch (Exception ex)
             {
@@ -100,8 +101,13 @@ namespace GolfClappApi.Controllers
                 UserDTO user =  _userService.GetUserByApiKey(apiKey);
                 //using (var scope = new TransactionScope())
                 //{
-                
-                        DateTime.TryParseExact(saveAndAddUserRequestDTO.Date, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result);
+
+                var settings = new JsonSerializerSettings
+                {
+                    ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+                };
+
+                DateTime.TryParseExact(saveAndAddUserRequestDTO.Date, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result);
                         var game = _gameService.Save(new GameDTO()
                         {
                             Id = Guid.NewGuid(),                            
@@ -110,8 +116,12 @@ namespace GolfClappApi.Controllers
                             Location = saveAndAddUserRequestDTO.Location,
                             Price = saveAndAddUserRequestDTO.Price,
                             ProviderCourseId = saveAndAddUserRequestDTO.ProviderCourseId,
-                            PackageCombination = Newtonsoft.Json.JsonConvert.SerializeObject(saveAndAddUserRequestDTO.PackageCombination),
-                            CreatorUserClientSecret = saveAndAddUserRequestDTO.CreatorUserClientSecret
+                            PackageCombination = Newtonsoft.Json.JsonConvert.SerializeObject(saveAndAddUserRequestDTO.PackageCombination, settings),
+                            CreatorUserClientSecret = saveAndAddUserRequestDTO.CreatorUserClientSecret,
+                            NumberOfPlayers = saveAndAddUserRequestDTO.NumberOfPlayers,
+                            Creator = user.Id,
+                            
+                            //TODO fill up fullyPaid param
                         });
 
                         _gameUserService.Save(saveAndAddUserRequestDTO.UsersIds, game.Id, user.Id, saveAndAddUserRequestDTO.PayedUsersIds, saveAndAddUserRequestDTO.NonUserPlayers, saveAndAddUserRequestDTO.PricePerPart);
@@ -152,7 +162,7 @@ namespace GolfClappApi.Controllers
                 
 
                 var resp = new GetByDateResponseDTO();
-                resp.Bookings = _gameService.GetByDate(request.Date, request.OlderBookings, userId);
+                resp.Bookings = _gameService.GetByDate(request.Date, request.OlderBookings, userId, request.OnlyWhenInvitedAndNotPayed);
                 responseObject.StatusCode = 200;
                 responseObject.Body = resp;
                 return responseObject;
@@ -161,6 +171,28 @@ namespace GolfClappApi.Controllers
             {
                 _logger.SaveErrorLog(ex.Message);
                 return null;
+            }
+        }
+
+
+        //[Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpGet("GetUsersByGameId/{gameId}")]
+        public IActionResult GetUsersByGameId(Guid gameId)
+        {
+            try
+            {
+                var gameUsers = _gameUserService.GetGameUsersByGameId(gameId);
+                List<UserDTO> users = new List<UserDTO>();
+                foreach ( var gameUser in gameUsers )
+                {
+                    users.Add(_userService.GetUserById(gameUser.UserId));
+                }
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                _logger.SaveErrorLog(ex.Message);
+                return BadRequest();
             }
         }
 
@@ -174,6 +206,7 @@ namespace GolfClappApi.Controllers
         public DateTime Date { get; set; }
         public bool OlderBookings { get; set; }
         public String UserId { get; set; }
+        public bool OnlyWhenInvitedAndNotPayed { get; set; }
     }
     public class GetByDateResponseDTO
     {

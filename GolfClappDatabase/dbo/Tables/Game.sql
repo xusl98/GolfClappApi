@@ -10,9 +10,12 @@
     [NumberOfPlayers]         INT              NOT NULL,
     [CreatorUserClientSecret] VARCHAR (MAX)    NOT NULL,
     [Creator]                 UNIQUEIDENTIFIER NULL,
+    [FullyPaid]               BIT              CONSTRAINT [DF_Game_FullyPaid] DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_Game] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Game_User] FOREIGN KEY ([Creator]) REFERENCES [dbo].[User] ([Id])
 );
+
+
 
 
 

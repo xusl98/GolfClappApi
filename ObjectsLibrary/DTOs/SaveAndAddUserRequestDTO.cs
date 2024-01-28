@@ -20,6 +20,7 @@ namespace ObjectsLibrary.Entities
         public List<Rate> PackageCombination { get; set; }
         public List<Guid> UsersIds { get; set; }
         public int NonUserPlayers { get; set; }
+        public int NumberOfPlayers { get; set; }
         public List<Guid> PayedUsersIds { get; set; }
 
 

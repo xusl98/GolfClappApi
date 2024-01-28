@@ -53,9 +53,12 @@ namespace GolfClappServiceLibrary.Services
             return _mapper.Map<List<GameEntity>, List<GameDTO>>(_gameRepository.Get());
         }
 
-        public List<GameDTO> GetByDate(DateTime date, bool olderBookings, Guid userId)
+        public List<GameDTO> GetByDate(DateTime date, bool olderBookings, Guid userId, bool onlyWhenInvitedAndNotPayed)
         {
-            return _mapper.Map<List<GameEntity>, List<GameDTO>>(_gameRepository.GetByDate(date, olderBookings, userId));
+            if (onlyWhenInvitedAndNotPayed)
+                return _mapper.Map<List<GameEntity>, List<GameDTO>>(_gameRepository.GetByDatePendingPayment(date, userId));
+            else
+                return _mapper.Map<List<GameEntity>, List<GameDTO>>(_gameRepository.GetByDate(date, olderBookings, userId));
         }
 
         public BaseResponseDTO Remove(Guid id)
@@ -72,6 +75,18 @@ namespace GolfClappServiceLibrary.Services
                 response.IsSuccess = false;
                 response.Message = ex.Message;
                 return response;
+            }
+        }
+
+        public List<GameDTO> GetUnpayedGames()
+        {
+            try
+            {
+                return _mapper.Map<List<GameEntity>, List<GameDTO>>(_gameRepository.GetUnpayedGames());
+            }
+            catch (Exception ex) 
+            {
+                return new List<GameDTO>();
             }
         }
     }

@@ -19,5 +19,6 @@ namespace ObjectsLibrary.DTOs
         public string? License { get; set; }
         public bool? GoogleSignIn { get; set; }
         public int NumberOfFriends { get; set; }
+        public string PaymentMethod { get; set; }
     }
 }

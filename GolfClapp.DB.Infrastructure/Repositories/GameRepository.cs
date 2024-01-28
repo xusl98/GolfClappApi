@@ -56,6 +56,23 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             }
                 
         }
+        public List<GameEntity> GetByDatePendingPayment(DateTime date, Guid userId)
+        {
+            var gamesForUser = _context.Games
+            .Join(
+                _context.GameUsers,
+                game => game.Id,
+                gameUser => gameUser.GameId,
+                (game, gameUser) => new { Game = game, GameUser = gameUser }
+            )
+            .Where(joinResult => joinResult.GameUser.UserId == userId && joinResult.Game.Creator != joinResult.GameUser.UserId && joinResult.GameUser.HasPayed == false)
+            .Select(joinResult => joinResult.Game)
+            .ToList();
+            
+            return gamesForUser.Where(g => g.Date >= date).OrderBy(g => g.Date).ToList();
+            
+                
+        }
 
         public GameEntity Remove(Guid id)
         {
@@ -78,6 +95,11 @@ namespace GolfClapp.DB.Infrastructure.Repositories
             }
             _context.SaveChanges();
             return game;
+        }
+
+        public List<GameEntity> GetUnpayedGames()
+        {
+            return _context.Games.Where(g => g.FullyPaid == false).ToList();
         }
     }
 }

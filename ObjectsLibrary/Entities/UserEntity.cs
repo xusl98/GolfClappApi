@@ -16,6 +16,7 @@ namespace ObjectsLibrary.Entities
         public string? License { get; set; }
         public string UserApiKey { get; set; }
         public bool GoogleSignIn { get; set; }
+        public string PaymentMethod { get; set; } 
 
     }
 }

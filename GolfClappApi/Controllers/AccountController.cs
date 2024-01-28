@@ -66,11 +66,15 @@ namespace GolfClappApi.Controllers
                 return BadRequest("Bad credentials");
             }
             //TODO Ask if login will be required with username email or both
+            
+
+            
             var user = await _userManager.FindByEmailAsync(request.UserName);
+            
 
             if (user == null)
             {
-                return BadRequest("Bad credentials");
+                return BadRequest("Bad credentials"); 
             }
 
             var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
@@ -88,6 +92,8 @@ namespace GolfClappApi.Controllers
             };
 
             return Ok(response);
+            
+
         }
 
         [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
@@ -178,6 +184,24 @@ namespace GolfClappApi.Controllers
             }
             catch (Exception ex)
             {                
+                return BadRequest();
+            }
+
+
+        }
+
+        [Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},ApiKey")]
+        [HttpPost("UpdatePaymentMethod")]
+        public async Task<ActionResult<CustomAuthenticationResponse>> UpdatePaymentMethod([FromBody] UserUpdateObject uNameObject)
+        {
+            try
+            {
+                string apiKey = HttpContext.Request.Headers["Api-Key"];
+                _userService.EditUserValues(uNameObject, apiKey);
+                return Ok(uNameObject);
+            }
+            catch (Exception ex)
+            {
                 return BadRequest();
             }
 

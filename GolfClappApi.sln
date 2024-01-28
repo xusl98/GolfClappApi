@@ -13,7 +13,9 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GolfClappDatabase", "GolfCl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GolfClapp.DB.Infrastructure", "GolfClapp.DB.Infrastructure\GolfClapp.DB.Infrastructure.csproj", "{3591C150-F573-4C61-9BF9-E388E206F4D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iMasterLibrary", "iMasterLibrary\iMasterLibrary.csproj", "{75C9C149-0D44-4F16-B486-0F3EB7ED37F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iMasterLibrary", "iMasterLibrary\iMasterLibrary.csproj", "{75C9C149-0D44-4F16-B486-0F3EB7ED37F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapturePaymentsMethod", "CapturePaymentsMethod\CapturePaymentsMethod.csproj", "{5BF14527-99D7-4498-A5B4-BCC1854771D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{75C9C149-0D44-4F16-B486-0F3EB7ED37F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75C9C149-0D44-4F16-B486-0F3EB7ED37F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75C9C149-0D44-4F16-B486-0F3EB7ED37F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF14527-99D7-4498-A5B4-BCC1854771D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF14527-99D7-4498-A5B4-BCC1854771D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF14527-99D7-4498-A5B4-BCC1854771D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF14527-99D7-4498-A5B4-BCC1854771D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

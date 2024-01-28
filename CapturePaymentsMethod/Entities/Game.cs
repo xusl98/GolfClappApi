@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectsLibrary.Entities
+namespace CapturePaymentsMethod.Entities
 {
-    public class GameDTO
+
+    public class Game
     {
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
@@ -18,7 +20,7 @@ namespace ObjectsLibrary.Entities
         public int NumberOfPlayers { get; set; }
         public string PackageCombination { get; set; }
         public string CreatorUserClientSecret { get; set; }
-        public Guid Creator { get; set; }
+        public Guid? Creator { get; set; }
         public bool FullyPaid { get; set; }
 
 

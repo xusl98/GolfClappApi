@@ -103,6 +103,7 @@ builder.Services.AddScoped<IIMasterAccessService, IMasterAccessService>();
 builder.Services.AddScoped<IIMasterProviderCourseService, IMasterProviderCourseService>();
 builder.Services.AddScoped<IIMasterProviderService, IMasterProviderService>();
 builder.Services.AddScoped<IIMasterDayAvailabilityService, IMasterDayAvailabilityService>();
+builder.Services.AddScoped<IIMasterBookService, IMasterBookService>();
 
 builder.Services.AddScoped<IAppIsBlockedRepository, AppIsBlockedRepository>();
 builder.Services.AddScoped<IAppIsBlockedService, AppIsBlockedService>();

@@ -15,5 +15,6 @@ namespace ObjectsLibrary.Authentication
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? License { get; set; }
+        public string? PaymentMethod { get; set; }
     }
 }

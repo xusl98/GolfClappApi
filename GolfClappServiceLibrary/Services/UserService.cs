@@ -98,6 +98,9 @@ namespace GolfClappServiceLibrary.Services
             if (userUpdateObject.License != null)
             {
                 user.License = userUpdateObject.License;
+            }if (userUpdateObject.PaymentMethod != null)
+            {
+                user.PaymentMethod = userUpdateObject.PaymentMethod;
             }
 
             _userRepository.Save(user);
